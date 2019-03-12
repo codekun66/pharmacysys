@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.zp.pharmacysys.mapper.UserMapper">
+	<select id="queryPasswordByUsername" parameterType="String"
+		resultType="String">
+		SELECT password
+		FROM user
+		WHERE username = #{username}
+	</select>
+	<select id="queryRoleByUsername" parameterType="String"
+		resultType="String">
+		SELECT role.role
+		FROM user
+		INNER JOIN role
+		ON user.role_id = role.id
+		WHERE username = #{username}
+	</select>
+	<select id="queryUserId" resultType="java.lang.Integer">
+		SELECT id
+		FROM user
+		WHERE username = #{username}
+	</select>
+</mapper>
