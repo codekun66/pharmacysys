@@ -1,6 +1,8 @@
 package com.zp.pharmacysys.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 	
 	//序列化
 	private static final long seriaVersionUID = 1L;

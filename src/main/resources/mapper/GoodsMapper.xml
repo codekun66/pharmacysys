@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.zp.pharmacysys.mapper.GoodsMapper">
+
+	<!-- 查询所有药品信息 -->
+	<select id = "queryGoodsInfo" resultType="java.util.Map">
+		SELECT 
+			id , name , code , type , price , summary ,
+			create_time as createTime,
+			modifield_time as modifieldTime ,
+			userId
+		FROM goods 
+	</select>
+	
+	<!-- 根据id查询药品信息 -->
+	<select id = "queryGoodsInfoById" resultType = "java.util.Map">
+		SELECT
+		 	id , name , code , type , price , summary ,
+			create_time as createTime ,
+			modifield_time as modifieldTime ,
+			userId
+		FROM goods
+		WHERE id = #{id} 
+	</select>
+	
+	<!-- 添加新药品信息 -->
+	<insert id = "insertGoods">
+		INSERT into
+			goods
+			(name , code , type , price , summary , create_time , user_id)
+		values(#{name} , #{code} , #{type} , #{price} , #{summary} , now() , #{userId})
+	</insert>
+</mapper>
