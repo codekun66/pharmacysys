@@ -11,9 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 @Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter{
-     /**
+   /*  *//**
      * 登录session key
-     */
+     *//*
     public final static String SESSION_KEY = "user";
     @Bean
     public SecurityInterceptor getSecurityInterceptor() {
@@ -39,5 +39,5 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter{
             response.sendRedirect(url);
             return false;
         }
-    }
+    }*/
 }

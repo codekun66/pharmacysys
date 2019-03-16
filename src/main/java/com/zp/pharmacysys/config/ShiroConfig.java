@@ -36,7 +36,7 @@ public class ShiroConfig {
         // setLoginUrl 如果不设置值，默认会自动寻找Web工程根目录下的"/login.jsp"页面 或 "/login" 映射
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         //登陆成功后的页面
-        shiroFilterFactoryBean.setSuccessUrl("/index.html");
+        shiroFilterFactoryBean.setSuccessUrl("/goods.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         // 设置无权限时跳转的 url;
         shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");
@@ -46,14 +46,14 @@ public class ShiroConfig {
         //游客，开发权限
         //filterChainDefinitionMap.put("/lessons/**", "anon");
         //用户，需要角色权限 “user”
-        filterChainDefinitionMap.put("/index", "roles[user]");
+        filterChainDefinitionMap.put("/goods/info", "roles[user]");
       //管理员，需要角色权限 “admin”
-        filterChainDefinitionMap.put("/index", "roles[admin]");
+        filterChainDefinitionMap.put("/goods/info", "roles[admin]");
         //开放登陆接口
         filterChainDefinitionMap.put("/login.html", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         //管理员，需要角色权限 “admin”
-        filterChainDefinitionMap.put("/back/**","authc");
+        filterChainDefinitionMap.put("/goods/**","authc");
         //其余接口一律拦截
         //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截
         //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;

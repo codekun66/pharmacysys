@@ -24,35 +24,36 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping("/index")
-	public String loginInfo() {
-		
-		return "index";
+	@RequestMapping(value = "/notLogin", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> notLogin() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", "您尚未登陆！");
+		return map;
 	}
+	@RequestMapping(value = "/notRole", method = RequestMethod.GET)
+	@ResponseBody
+    public Map<String, Object> notRole() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", "您没有权限！");
+        return map;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> logout() {
+    	Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", "成功注销！");
+        return map;
+    }
 	
-	@RequestMapping(value = "/login.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/login.html", method = RequestMethod.GET)
 	public String toLogin () {
     	return "login";
     }
-	
-//	@PostMapping("/loginPost")
-//    public String loginPost(String account,
-//            String password, HttpSession session) {
-//        Map<String, Object> map = new HashMap<>();
-//        if (!"123456".equals(password)) {
-//            map.put("success", false);
-//            map.put("message", "密码错误");
-//            return "err";
-//        }
-//        // 设置session
-//        session.setAttribute(WebSecurityConfig.SESSION_KEY, account);
-//        map.put("success", true);
-//        map.put("message", "登录成功");
-//        return "index";
-//    }
 	 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
+	@ResponseBody
     public Map<String, Object> login(String username, String password ) throws Exception {
         // 从SecurityUtils里边创建一个 subject
         Subject subject = SecurityUtils.getSubject();
@@ -68,18 +69,4 @@ public class LoginController {
         return map ;
     }
 	
-//	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
-//    @ResponseBody
-//    public Map<String, Object> logout() {
-//    	Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("msg", "成功注销！");
-//        return map;
-//    }
-	
-	@GetMapping("/logout")
-    public String logout(HttpSession session) {
-        // 移除session
-        session.removeAttribute(WebSecurityConfig.SESSION_KEY);
-        return "redirect:/login";
-    }
 }
