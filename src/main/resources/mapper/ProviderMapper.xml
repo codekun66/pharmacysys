@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.zp.pharmacysys.mapper.ProviderMapper">
+	
+	<!-- 查询所有供应商信息 -->
+	<select id = "queryProviderInfo" resultType="com.zp.pharmacysys.bean.Provider">
+		SELECT 
+			id , name , linkman , mobile , addres , summary , state ,
+			create_time as createTime,
+			modifield_time as modifieldTime ,
+			user_id as userId
+		FROM provider 
+		WHERE state =1
+	</select>
+	
+	<!-- 添加供应商信息 -->
+	<insert id= "insertProvider" >
+		INSERT INTO 
+		provider 
+		(name , linkman , mobile , addres , summary ,create_time , modifield_time , state)
+		values(#{name} , #{linkman} , #{mobile} , #{addres} , #{summary} , now() , now() , 1 )
+	</insert>
+	
+	<!-- 更新对应id供应商信息 -->
+	<update id="updateProvider">
+		update
+		lessons
+		set
+		pageview=(pageview+1)
+		where id = #{id}
+	</update>
+	
+	<!-- 删除id供应商信息 -->
+	<update id="deleteProvider">
+		update
+		provider
+		set
+		state = 2
+		where id = #{id}
+	</update>
+	
+</mapper>
