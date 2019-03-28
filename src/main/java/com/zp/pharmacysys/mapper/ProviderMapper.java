@@ -29,7 +29,7 @@ public interface ProviderMapper {
 	  *
 	  * @return
 	  */
-	int updateProvider(Map<String, Object> map); 
+	int updateProvider(Provider provider); 
 	
 	/**
 	 * 删除供应商信息
@@ -37,4 +37,11 @@ public interface ProviderMapper {
 	 * @return
 	 */
 	int deleteProvider(@Param("id") int id);
+	
+	/**
+	 * 根据Id查询供应商信息
+	 *
+	 * @return 
+	 */
+	Provider queryProviderInfoById(@Param("id") int id);
 }

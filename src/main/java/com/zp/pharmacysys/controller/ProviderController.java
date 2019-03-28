@@ -51,12 +51,12 @@ public class ProviderController {
 		}
 	}
 	/*
-	 * 增加课程列表接口
+	 * 删除课程接口
 	 */
 	 @RequestMapping(value = "/deleteProvider/{id}", method = RequestMethod.GET)
 	 @ResponseBody
 	    public Map<String, Object> deleteProvider(@PathVariable("id") int id , ModelMap modelMap) throws Exception {  //@PathVariable用于定义自定义或动态请求URI
-		  int count =providerService.deleteProviderById(id);
+		  int count = providerService.deleteProviderById(id);
 		  Map<String, Object> map  = new HashMap<>();
 		  if(count > 0) {
 			  map.put("msg", "success");
@@ -68,5 +68,33 @@ public class ProviderController {
 			}
 		  return map;   
 	    }
-	
+	 /*
+	  * 根据Id查询供应商信息
+	  */
+	 @RequestMapping(value = "/provider/{id}", method = RequestMethod.GET)
+	 @ResponseBody
+		public Provider getProviderById(@PathVariable("id") int id) { // @PathVariable用于定义自定义或动态请求URI
+		 Provider pro = providerService.getProviderById(id);
+		 return pro;
+		 
+	 }
+	 /*
+	  * 更新供应商信息
+	  */
+	 @RequestMapping(value = "/provider/update", method = RequestMethod.POST)
+	 @ResponseBody
+		public Map<String, Object> updateProvider(@RequestBody Provider provider) throws Exception { // @PathVariable用于定义自定义或动态请求URI
+		 Map<String, Object> map = new HashMap<>();
+		 int count = providerService.updateProviderById(provider);
+		 if(count > 0) {
+			  map.put("msg", "success");
+			  map.put("returnCode", 1);
+			}
+		  else {
+			  map.put("msg", "error");
+			  map.put("returnCode",0);
+			}
+		  return map;  
+	 }
+	 
 }

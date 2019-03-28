@@ -5,7 +5,7 @@
 	<!-- 查询所有药品信息 -->
 	<select id = "queryGoodsInfo" resultType="java.util.Map">
 		SELECT 
-			id , name , code , type , price , summary ,
+			id , name , code , type , purchaseprice , sellprice , summary ,
 			create_time as createTime,
 			modifield_time as modifieldTime ,
 			user_id as userId
@@ -15,7 +15,7 @@
 	<!-- 根据id查询药品信息 -->
 	<select id = "queryGoodsInfoById" resultType = "java.util.Map">
 		SELECT
-		 	id , name , code , type , price , summary ,
+		 	id , name , code , type , purchaseprice , sellprice  , summary ,
 			create_time as createTime ,
 			modifield_time as modifieldTime ,
 			user_id as userId
@@ -27,7 +27,7 @@
 	<insert id = "insertGoods">
 		INSERT into
 			goods
-			(name , code , type , price , summary , create_time , user_id)
-		values(#{name} , #{code} , #{type} , #{price} , #{summary} , now() , #{userId})
+			(name , code , type , purchaseprice , sellprice  , summary , create_time , user_id)
+		values(#{name} , #{code} , #{type} , #{purchaseprice} , #{sellprice} ,  #{summary} , now() , #{userId})
 	</insert>
 </mapper>

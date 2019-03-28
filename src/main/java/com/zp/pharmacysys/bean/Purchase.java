@@ -18,16 +18,16 @@ public class Purchase implements Serializable{
 	private int id;
 	//商品id
 	private int goodsId;
-	//联系人
-	private String linkman;
-	//电话
-	private String moblile;
-	//地址
-	private String address;
-	//描述
-	private String descs;
-	//状态
-	private String state;
+	//供应商id
+	private int providerId;
+	//订单号
+	private String ordercode;
+	//数量
+	private String count;
+	//单价
+	private String unitprice;
+	//总价
+	private String totalprice;
 	//创建时间
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonSerialize(using = DateUtil.class)
@@ -38,6 +38,8 @@ public class Purchase implements Serializable{
 	private Data modifieldTime;
 	//跟新人id
 	private int userId;
+	//备注
+	private String remark;
 	public int getId() {
 		return id;
 	}
@@ -50,34 +52,65 @@ public class Purchase implements Serializable{
 	public void setGoodsId(int goodsId) {
 		this.goodsId = goodsId;
 	}
-	public String getMoblile() {
-		return moblile;
+	public int getProviderId() {
+		return providerId;
 	}
-	public void setMoblile(String moblile) {
-		this.moblile = moblile;
+	public void setProviderId(int providerId) {
+		this.providerId = providerId;
 	}
-	public String getLinkman() {
-		return linkman;
+	public String getOrdercode() {
+		return ordercode;
 	}
-	public void setLinkman(String linkman) {
-		this.linkman = linkman;
+	public void setOrdercode(String ordercode) {
+		this.ordercode = ordercode;
 	}
-	public String getAddress() {
-		return address;
+	public String getCount() {
+		return count;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setCount(String count) {
+		this.count = count;
 	}
-	public String getDescs() {
-		return descs;
+	public String getUnitprice() {
+		return unitprice;
 	}
-	public void setDescs(String descs) {
-		this.descs = descs;
+	public void setUnitprice(String unitprice) {
+		this.unitprice = unitprice;
 	}
-	public String getState() {
-		return state;
+	public String getTotalprice() {
+		return totalprice;
 	}
-	public void setState(String state) {
-		this.state = state;
+	public void setTotalprice(String totalprice) {
+		this.totalprice = totalprice;
 	}
+	public Data getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Data createTime) {
+		this.createTime = createTime;
+	}
+	public Data getModifieldTime() {
+		return modifieldTime;
+	}
+	public void setModifieldTime(Data modifieldTime) {
+		this.modifieldTime = modifieldTime;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	@Override
+	public String toString() {
+		return "Purchase [id=" + id + ", goodsId=" + goodsId + ", providerId=" + providerId + ", ordercode=" + ordercode
+				+ ", count=" + count + ", unitprice=" + unitprice + ", totalprice=" + totalprice + ", createTime="
+				+ createTime + ", modifieldTime=" + modifieldTime + ", userId=" + userId + ", remark=" + remark + "]";
+	}
+	
 }

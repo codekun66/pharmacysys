@@ -32,15 +32,21 @@ public class ProviderServiceImpl implements ProviderService {
 	}
 
 	@Override
-	public int updateProviderById(Map<String, Object> map)  throws Exception{
+	public int updateProviderById(Provider provider)  throws Exception{
 		// TODO Auto-generated method stub
-		return 0;
+		return providerMapper.updateProvider(provider);
 	}
 
 	@Override
 	public int deleteProviderById(int id) throws Exception {
 		// TODO Auto-generated method stub
 		return providerMapper.deleteProvider(id);
+	}
+
+	@Override
+	public Provider getProviderById(int id) {
+		// TODO Auto-generated method stub
+		return providerMapper.queryProviderInfoById(id);
 	}
 
 	

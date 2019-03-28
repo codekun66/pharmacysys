@@ -24,9 +24,14 @@
 	<!-- 更新对应id供应商信息 -->
 	<update id="updateProvider">
 		update
-		lessons
+		provider
 		set
-		pageview=(pageview+1)
+		name=#{name} ,
+        linkman= #{linkman},
+		addres = #{addres},
+		mobile = #{mobile},
+		summary= #{summary},
+        modifield_time = now() 
 		where id = #{id}
 	</update>
 	
@@ -39,4 +44,16 @@
 		where id = #{id}
 	</update>
 	
+	<!-- 根据Id查询供应商信息  -->
+	<select id = "queryProviderInfoById" resultType="com.zp.pharmacysys.bean.Provider">
+		SELECT 
+			id , name , linkman , mobile , addres , summary , state ,
+			create_time as createTime,
+			modifield_time as modifieldTime ,
+			user_id as userId
+		FROM provider 
+		WHERE state =1
+		and
+		id = #{id}
+	</select>
 </mapper>

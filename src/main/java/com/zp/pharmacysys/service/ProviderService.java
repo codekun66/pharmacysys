@@ -30,7 +30,7 @@ public interface ProviderService {
 	  *
 	  * @return
 	  */
-	int updateProviderById(Map<String, Object> map) throws Exception; 
+	int updateProviderById(Provider provider) throws Exception; 
 	
 	/**
 	 * 删除供应商信息
@@ -38,4 +38,11 @@ public interface ProviderService {
 	 * @return
 	 */
 	int deleteProviderById(int id) throws Exception;
+	
+	/**
+	 * 通过Id获取供应商信息
+	 * 
+	 * @return
+	 */
+	Provider getProviderById(int id);
 }

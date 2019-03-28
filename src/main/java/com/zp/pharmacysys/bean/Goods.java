@@ -16,11 +16,13 @@ public class Goods implements Serializable{
 	//商品名称
 	private String name;
 	//商品编号
-	private int code;
+	private String code;
 	//商品类型
 	private String type;
-	//商品价格
-	private String price;
+	//预计进价
+	private String purchaseprice;
+	//预计售价
+	private String sellprice;
 	//商品简介
 	private String summary;
 	//创建者id
@@ -33,12 +35,6 @@ public class Goods implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonSerialize(using = DateUtil.class)
 	private Date modifieldTime;
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 	public int getId() {
 		return id;
 	}
@@ -51,10 +47,10 @@ public class Goods implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getType() {
@@ -63,11 +59,17 @@ public class Goods implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getPrice() {
-		return price;
+	public String getPurchaseprice() {
+		return purchaseprice;
 	}
-	public void setPrice(String price) {
-		this.price = price;
+	public void setPurchaseprice(String purchaseprice) {
+		this.purchaseprice = purchaseprice;
+	}
+	public String getSellprice() {
+		return sellprice;
+	}
+	public void setSellprice(String sellprice) {
+		this.sellprice = sellprice;
 	}
 	public String getSummary() {
 		return summary;
@@ -75,4 +77,30 @@ public class Goods implements Serializable{
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getModifieldTime() {
+		return modifieldTime;
+	}
+	public void setModifieldTime(Date modifieldTime) {
+		this.modifieldTime = modifieldTime;
+	}
+	@Override
+	public String toString() {
+		return "Goods [id=" + id + ", name=" + name + ", code=" + code + ", type=" + type + ", purchaseprice="
+				+ purchaseprice + ", sellprice=" + sellprice + ", summary=" + summary + ", userId=" + userId
+				+ ", createTime=" + createTime + ", modifieldTime=" + modifieldTime + "]";
+	}
+
+	
 }
