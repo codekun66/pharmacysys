@@ -1,5 +1,7 @@
 package com.zp.pharmacysys.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface UserMapper {
 	
 	/**
@@ -21,5 +23,11 @@ public interface UserMapper {
      * @return user/admin
      */
     int queryUserId(String username);
-
+    
+    /**
+     * 根据用户id获取用户姓名
+     * @param id 用户名
+     * @return username
+     */
+    String queryUsernameById (@Param("id") int id) ;
 }

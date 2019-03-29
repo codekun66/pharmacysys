@@ -17,7 +17,7 @@ public interface ProviderService {
      *
      * @return
      */
-	List<Provider> getProviderInfo() throws Exception;
+	List<Map<String, Object>> getProviderInfo() throws Exception;
 	
 	/**
      * 添加供应商信息

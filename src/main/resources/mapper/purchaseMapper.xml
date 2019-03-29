@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.zp.pharmacysys.mapper.PurchaseMapper">
+
+	<!-- 查询采购订单信息 -->
+	<select id = "queryPurchaseInfo" resultType="java.util.Map">
+		SELECT
+		*
+		FROM purchase
+		where state = 0 or state =1
+	</select>
+	
+	<!-- 根据id查询采购订单信息 -->
+	<select id = "queryPurchaseInfoById" resultType="java.util.Map">
+		SELECT
+		*
+		FROM purchase
+		WHERE id = #{id}
+	</select>
+	<!-- 审核采购订单 -->
+	<update id="updatePurchaseState">
+		update
+		purchase
+		set
+		state = 1
+		where id = #{id}
+	</update>
+	<!-- 查询未审核采购订单信息 -->
+	<select id = "queryPurchaseNoState" resultType="java.util.Map">
+		SELECT
+		*
+		FROM purchase
+		where state = 0 
+	</select>
+</mapper>

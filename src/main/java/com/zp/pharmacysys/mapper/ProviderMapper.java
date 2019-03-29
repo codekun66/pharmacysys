@@ -16,7 +16,7 @@ public interface ProviderMapper {
      *
      * @return
      */
-	List<Provider> queryProviderInfo();
+	List<Map<String, Object>> queryProviderInfo();
 	
 	/**
      * 添加供应商信息

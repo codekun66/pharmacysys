@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.zp.pharmacysys.bean.Provider;
 import com.zp.pharmacysys.mapper.ProviderMapper;
+import com.zp.pharmacysys.mapper.UserMapper;
 import com.zp.pharmacysys.service.ProviderService;
 
 @Service
@@ -17,11 +18,17 @@ public class ProviderServiceImpl implements ProviderService {
 	//使用mapper层提供的接口
 		@Autowired
 		private ProviderMapper providerMapper;
+		@Autowired
+		private UserMapper userMapper;
 	
 	@Override
-	public List<Provider> getProviderInfo() throws Exception {
-		List<Provider> list = new ArrayList<Provider>();
-		list = providerMapper.queryProviderInfo();
+	public List<Map<String, Object>> getProviderInfo() throws Exception {
+		List<Map<String, Object>> list = providerMapper.queryProviderInfo();
+		for (Map<String, Object> map : list) {
+			int userId = (int) map.get("userId");
+			String userName = userMapper.queryUsernameById(userId);
+			map.put("userName", userName);
+		}
 		return list;
 	}
 

@@ -20,7 +20,7 @@ public class DateUtil extends JsonSerializer<Date> {
 		
 	}
 	
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
     public void serialize(Date date, JsonGenerator gen, SerializerProvider provider)

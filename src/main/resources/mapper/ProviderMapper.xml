@@ -3,7 +3,7 @@
 <mapper namespace = "com.zp.pharmacysys.mapper.ProviderMapper">
 	
 	<!-- 查询所有供应商信息 -->
-	<select id = "queryProviderInfo" resultType="com.zp.pharmacysys.bean.Provider">
+	<select id = "queryProviderInfo" resultType="java.util.Map">
 		SELECT 
 			id , name , linkman , mobile , addres , summary , state ,
 			create_time as createTime,
@@ -14,7 +14,8 @@
 	</select>
 	
 	<!-- 添加供应商信息 -->
-	<insert id= "insertProvider" >
+	<insert id= "insertProvider"   useGeneratedKeys="true" keyProperty="id"
+		keyColumn="id" parameterType="com.zp.pharmacysys.bean.Provider" >
 		INSERT INTO 
 		provider 
 		(name , linkman , mobile , addres , summary ,create_time , modifield_time , state)

@@ -40,6 +40,8 @@ public class Purchase implements Serializable{
 	private int userId;
 	//备注
 	private String remark;
+	//状态 
+	private String state;
 	public int getId() {
 		return id;
 	}
@@ -106,11 +108,20 @@ public class Purchase implements Serializable{
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	@Override
 	public String toString() {
 		return "Purchase [id=" + id + ", goodsId=" + goodsId + ", providerId=" + providerId + ", ordercode=" + ordercode
 				+ ", count=" + count + ", unitprice=" + unitprice + ", totalprice=" + totalprice + ", createTime="
-				+ createTime + ", modifieldTime=" + modifieldTime + ", userId=" + userId + ", remark=" + remark + "]";
+				+ createTime + ", modifieldTime=" + modifieldTime + ", userId=" + userId + ", remark=" + remark
+				+ ", state=" + state + "]";
 	}
+
 	
 }

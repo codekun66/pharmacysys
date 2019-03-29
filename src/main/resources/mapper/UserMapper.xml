@@ -20,4 +20,10 @@
 		FROM user
 		WHERE username = #{username}
 	</select>
+	<select id="queryUsernameById" parameterType="java.lang.Integer"
+	  resultType="String">
+		SELECT username
+		FROM user
+		WHERE id = #{id}
+	</select>
 </mapper>

@@ -24,4 +24,11 @@ public interface UserService {
      * @return user/admin
      */
     int getUserId(String username);
+    
+    /**
+     * 根据用户id获取用户姓名
+     * @param id 用户名
+     * @return username
+     */
+    String getUsernameById(int id);
 }

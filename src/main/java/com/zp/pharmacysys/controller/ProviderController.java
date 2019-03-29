@@ -26,9 +26,8 @@ public class ProviderController {
 	 */
 	@RequestMapping(value = "/provider/info" , method = RequestMethod.GET)
 	@ResponseBody
-	public List<Provider> getProviderList() throws Exception{
-		List<Provider> list = providerService.getProviderInfo();
-		return  list;
+	public List<Map<String, Object>> getProviderList() throws Exception{
+		return  providerService.getProviderInfo();
 	}
 	/*
 	 * 增加课程列表接口

@@ -10,6 +10,7 @@
 			modifield_time as modifieldTime ,
 			user_id as userId
 		FROM goods 
+		where state = 1
 	</select>
 	
 	<!-- 根据id查询药品信息 -->

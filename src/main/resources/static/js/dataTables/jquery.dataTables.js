@@ -10571,7 +10571,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "没有可操作的数据 ",
 	
 	
 			/**
@@ -10624,7 +10624,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": " 0 条数据",
 	
 	
 			/**
