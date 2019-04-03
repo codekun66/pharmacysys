@@ -114,7 +114,7 @@
 			 <div class="row">
                     <div class="col-md-12">
                         <h3 class="page-header">
-                                                          采购订单 
+                                                                   供应商信息 
                         </h3>
                     </div>
                 </div> 
@@ -129,19 +129,18 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>采购订单号</th>
                                             <th>商品名称</th>
-                                            <th>供应商</th>
-                                            <th>数量</th>
-                                            <th>单价</th>
-                                            <th>总价</th>
-                                            <th>审核状态</th>
-                                            <th>采购人</th>
-                                            <th>跟新时间</th>
-                                            <th>是否通过</th>
+                                            <th>商品编号</th>
+                                            <th>库存量</th>
+                                            <th>销售量</th>
+                                            <th>上次进价</th>
+                                            <th>预设售价</th>
+                                            <th>库存总值</th>
+                                            <th>售价总值</th>
+                                            <th>操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="purchaseall">
+                                    <tbody id="providerall">
                                        
                                     </tbody>
                                 </table>
@@ -175,16 +174,14 @@
     <script id="table-template" type="text/x-handlebars-template">
     {{#each this}}
       <tr class="odd gradeX">
-          <td>{{ordercode}}</td>
-          <td>{{goodsName}}</td>
-          <td>{{providerName}}</td>
-          <td>{{count}}</td>
-          <td>{{unitprice}}</td>
-          <td>{{totalprice}}</td>
-		  <td>{{purchaseState}}</td>
+          <td>{{name}}</td>
+          <td>{{linkman}}</td>
+          <td>{{mobile}}</td>
+          <td>{{addres}}</td>
+          <td>{{summary}}</td>
           <td>{{userName}}</td>
-          <td>{{modifield_time}}</td>
-          <td><button class="check" data-id="{{id}}"><i class="fa fa-check" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="uncheck" data-id="{{id}}"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+          <td>{{modifieldTime}}</td>
+          <td><button class="add" data-id="{{id}}"><i class="fa fa-plus" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
      </tr>
 	      {{/each}}  
     </script>  
@@ -193,23 +190,23 @@
     <script>
             $.ajax({
                 type: "GET",
-                url: "/purchase/uncheck",
+                url: "/provider/info",
                 dataType: "json",
                 data: {},
                 success: function (json) {
                     var func = Handlebars.compile($("#table-template").html());
 				    var result = func(json);
-                    $('#purchaseall').html(result);
+                    $('#providerall').html(result);
                     $('#dataTables-example').dataTable();
 
                 }
             });
             // 模态框确认按钮点击事件
-            $("#purchaseall").on('click', '.check', function () {
+            $("#providerall").on('click', '.del', function () {
                 var _this = this
-                var flag = confirm('确定审核通过吗？')
+                var flag = confirm('确定要删除本条记录吗？')
                 if (flag) {
-                    $.get('/checkpurchase/' + $(this).data('id'), function (data) {
+                    $.get('/deleteProvider/' + $(this).data('id'), function (data) {
                         console.log(data)
                         if (data.msg === "success") {
                             $(_this).parents('tr').remove()

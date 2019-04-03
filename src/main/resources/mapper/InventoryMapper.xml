@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.zp.pharmacysys.mapper.InventoryMapper">
+
+	<!-- 添加库存信息 -->
+	<insert id= "insertInventory"   useGeneratedKeys="true" keyProperty="id"
+		keyColumn="id" parameterType="java.util.Map" >
+		INSERT INTO 
+		inventory 
+		(goods_id , incount , sellcount , lastpurchaseprice , lastsellprice ,inventorytotal  ,selltotal , create_time , modifield_time , state)
+		values(#{goodsId} ,0 , 0 , #{lastpurchaseprice} , #{lastsellprice} , 0, 0 , now() , now() , 1 )
+	</insert>
+	
+	<!-- 更新库存信息 -->
+	<update id="updateInventory">
+		update
+		inventory
+		set
+		<if test = "incount != null &amp; incount != '' ">
+		incount=#{incount} ,
+		</if>
+		<if test = "sellcount != null &amp; sellcount != '' ">
+		sellcount=#{sellcount} ,
+		</if>
+		<if test = "lastpurchaseprice != null &amp; lastpurchaseprice != '' ">
+		lastpurchaseprice=#{lastpurchaseprice} ,
+		</if>
+		<if test = "lastsellprice != null &amp; lastsellprice != '' ">
+		lastsellprice=#{lastsellprice} ,
+		</if>
+		<if test = "inventorytotal != null &amp; inventorytotal != '' ">
+		inventorytotal=#{inventorytotal} ,
+		</if>
+		<if test = "selltotal != null &amp; selltotal != '' ">
+		selltotal=#{selltotal} ,
+		</if>
+        modifield_time = now() 
+		where goods_id = #{goodsId}
+	</update>
+	<!-- 根据Id查询库存信息  -->
+	<select id = "queryInventoryInfoById" resultType="java.util.Map">
+		SELECT 
+		*
+		FROM inventory 
+		WHERE 
+		goods_id = #{goodsId}
+	</select>
+
+</mapper>

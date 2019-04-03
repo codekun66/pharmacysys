@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.zp.pharmacysys.bean.Goods;
+import com.zp.pharmacysys.bean.Provider;
 
 /*
  * Goods Mapper接口层
@@ -25,9 +26,15 @@ public interface GoodsMapper {
 	Map<String,Object> queryGoodsInfoById(@Param("id") int id);
 	
 	/*
-	 * 根据id更新药品信息
+	 * 添加药品信息
 	 * @return
 	 * */
 	int insertGoods(Goods goods);
-
+	
+	/*
+	 * 根据goodsCode查询药品id
+	 * @return
+	 * */
+	int queryGoodsIdByCode (String code);
+	
 }

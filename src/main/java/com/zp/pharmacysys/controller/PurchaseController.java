@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+import com.zp.pharmacysys.bean.Provider;
 import com.zp.pharmacysys.bean.Purchase;
 import com.zp.pharmacysys.service.PurchaseService;
 
@@ -64,4 +67,25 @@ public class PurchaseController {
 			}
 		  return map;   
 	    }
+	 
+		/*
+		 * 增加采购订单信息接口
+		 */
+		@RequestMapping(value = "/purchase/add" , method = RequestMethod.POST)
+		@ResponseBody
+		public Map<String, Object> addPurchase(@RequestBody JSONObject jsonParam) throws Exception{
+			System.out.println(jsonParam.toJSONString());
+			int count = purchaseService.addPurchase(jsonParam);
+			Map<String, Object> map = new HashMap<>();
+			if(count > 0) {
+				map.put("msg", "success");
+				map.put("returnCode", 1);
+				return map;
+			}
+			else {
+				map.put("msg","error");
+				map.put("returnCode", 0);
+				return map;
+			}
+		}
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zp.pharmacysys.bean.Provider;
 import com.zp.pharmacysys.bean.Purchase;
 import com.zp.pharmacysys.mapper.PurchaseMapper;
 
@@ -34,4 +35,11 @@ public interface PurchaseService {
 	 * 审核通过采购订单信息
 	 * */
 	int checkPurchaseById(int id) throws Exception;
+	
+	/*
+     * 添加采购订单信息
+     *
+     */
+	int addPurchase(Map<String, Object> map) throws Exception;
+	
 }

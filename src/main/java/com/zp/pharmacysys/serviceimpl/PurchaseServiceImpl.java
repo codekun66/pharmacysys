@@ -1,5 +1,6 @@
 package com.zp.pharmacysys.serviceimpl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,10 +12,12 @@ import org.springframework.stereotype.Service;
 import com.zp.pharmacysys.bean.Provider;
 import com.zp.pharmacysys.bean.Purchase;
 import com.zp.pharmacysys.mapper.GoodsMapper;
+import com.zp.pharmacysys.mapper.InventoryMapper;
 import com.zp.pharmacysys.mapper.ProviderMapper;
 import com.zp.pharmacysys.mapper.PurchaseMapper;
 import com.zp.pharmacysys.mapper.UserMapper;
 import com.zp.pharmacysys.service.PurchaseService;
+import com.zp.pharmacysys.util.OrderUtil;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
@@ -27,6 +30,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 	private GoodsMapper goodsMapper;
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private InventoryMapper inventoryMapper;
 	
 	@Override
 	public List<Map<String, Object>> getPurchaseInfo() throws Exception {
@@ -57,9 +62,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public Map<String, Object> getPurchaseInfoById(int id) throws Exception {
-		Purchase purchase = purchaseMapper.queryPurchaseInfoById(id);
-		int goodsId = purchase.getGoodsId();
-		int providerId = purchase.getProviderId();
+		Map<String, Object> purchaseMap = purchaseMapper.queryPurchaseInfoById(id);
+		int goodsId = (int) purchaseMap.get("goods_id");
+		int providerId =(int) purchaseMap.get("provider_id");
 		Map<String, Object>  providerMap = (Map<String, Object>) providerMapper.queryProviderInfoById(providerId);
 		Map<String, Object>  goodsMap = (Map<String, Object>) goodsMapper.queryGoodsInfoById(goodsId);
 		String goodsName = (String) goodsMap.get("name");
@@ -97,9 +102,42 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public int checkPurchaseById(int id) throws Exception {
-		// TODO Auto-generated method stub
+	    Map<String, Object> map = purchaseMapper.queryPurchaseInfoById(id);
+	    int goodsId = (int)map.get("goods_id");
+		//查询该商品库存
+		Map<String, Object> inventoryMap = inventoryMapper.queryInventoryInfoById(goodsId);
+		//获得库存已有的数量
+		int existCount = (int) inventoryMap.get("incount");
+		Map<String, Object> updateInventoryMap = new HashMap<>();
+		updateInventoryMap.put("goodsId", goodsId);
+		//获取此次采购订单数量
+        int count = (int) map.get("count");
+        int totalCount = count+existCount ;
+        BigDecimal x = new BigDecimal(totalCount); 
+        updateInventoryMap.put("incount",totalCount );
+        //进价
+        BigDecimal unitprice = (BigDecimal) map.get("unitprice");
+        updateInventoryMap.put("lastpurchaseprice", unitprice);
+        //售价
+        BigDecimal lastsellprice = (BigDecimal) inventoryMap.get("lastsellprice");
+        //库存总值
+        updateInventoryMap.put("inventorytotal",  unitprice.multiply(x) );
+        //销售总值
+        
+        updateInventoryMap.put("selltotal", lastsellprice.multiply(x) );
+        int updateInventory = inventoryMapper.updateInventory(updateInventoryMap);
 		return purchaseMapper.updatePurchaseState(id);
 	}
+
+	@Override
+	public int addPurchase(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		map.put("ordercode", OrderUtil.createOrder());
+		//采购商品id
+		return purchaseMapper.insertPurchase(map);
+	}
+	
+	
 	
 	
 

@@ -22,7 +22,7 @@ public class ProviderController {
 	@Autowired 
 	ProviderService providerService;
 	/*
-	 * 获得所有课程列表接口
+	 * 获得所有供应商信息列表接口
 	 */
 	@RequestMapping(value = "/provider/info" , method = RequestMethod.GET)
 	@ResponseBody
@@ -30,7 +30,7 @@ public class ProviderController {
 		return  providerService.getProviderInfo();
 	}
 	/*
-	 * 增加课程列表接口
+	 * 增加供应商信息列表接口
 	 */
 	@RequestMapping(value = "/provider/add" , method = RequestMethod.POST)
 	@ResponseBody
@@ -50,7 +50,7 @@ public class ProviderController {
 		}
 	}
 	/*
-	 * 删除课程接口
+	 * 删除供应商信息接口
 	 */
 	 @RequestMapping(value = "/deleteProvider/{id}", method = RequestMethod.GET)
 	 @ResponseBody

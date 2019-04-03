@@ -35,6 +35,9 @@ public class Goods implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonSerialize(using = DateUtil.class)
 	private Date modifieldTime;
+	//状态
+	private String state;
+	
 	public int getId() {
 		return id;
 	}
@@ -95,12 +98,19 @@ public class Goods implements Serializable{
 	public void setModifieldTime(Date modifieldTime) {
 		this.modifieldTime = modifieldTime;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	@Override
 	public String toString() {
 		return "Goods [id=" + id + ", name=" + name + ", code=" + code + ", type=" + type + ", purchaseprice="
 				+ purchaseprice + ", sellprice=" + sellprice + ", summary=" + summary + ", userId=" + userId
-				+ ", createTime=" + createTime + ", modifieldTime=" + modifieldTime + "]";
+				+ ", createTime=" + createTime + ", modifieldTime=" + modifieldTime + ", state=" + state + "]";
 	}
+
 
 	
 }

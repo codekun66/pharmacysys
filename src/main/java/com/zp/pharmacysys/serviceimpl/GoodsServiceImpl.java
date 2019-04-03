@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.zp.pharmacysys.bean.Goods;
 import com.zp.pharmacysys.mapper.GoodsMapper;
+import com.zp.pharmacysys.mapper.InventoryMapper;
 import com.zp.pharmacysys.service.GoodsService;
 
 /*
@@ -21,7 +22,9 @@ public class GoodsServiceImpl implements GoodsService {
 	//使用mapper层提供的接口
 	@Autowired
 	private GoodsMapper goodsMapper;
-
+	@Autowired
+	private InventoryMapper inventoryMapper;
+	
 	@Override
 	public List<Map<String, Object>> getGoodsList() throws Exception {
 		// TODO Auto-generated method stub
@@ -39,15 +42,17 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public int addGoods(Goods goods) {
+	public int addGoods(Goods goods) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			return goodsMapper.insertGoods(goods);
-		}catch(Exception e) {
-			e.printStackTrace();
-			return 0;
-		}
-		
+		int count = goodsMapper.insertGoods(goods);
+		String  goodsCode = goods.getCode();
+		int goodsId = goodsMapper.queryGoodsIdByCode(goodsCode);
+		Map<String, Object> inventoryMap = new HashMap<>();
+		inventoryMap.put("goodsId", goodsId);
+		inventoryMap.put("lastpurchaseprice", goods.getPurchaseprice());
+		inventoryMap.put("sellprice", goods.getSellprice());
+		int count2 = inventoryMapper.insertInventory(inventoryMap);
+		return count;
 	}
 
 }

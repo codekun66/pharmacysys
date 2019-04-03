@@ -19,7 +19,7 @@ public interface PurchaseMapper {
 	 * 根据id查询采购订单信息
 	 * @return
 	 * */
-	Purchase queryPurchaseInfoById(@Param("id") int id);
+	Map<String, Object> queryPurchaseInfoById(@Param("id") int id);
 	
 	/*
 	 * 审核采购订单
@@ -32,4 +32,10 @@ public interface PurchaseMapper {
 	 * @return
 	 * */
 	List<Map<String, Object>> queryPurchaseNoState();
+	
+	/*
+	 * 添加采购订单信息
+	 * @return
+	 * */
+	int insertPurchase(Map<String, Object> map);
 }
