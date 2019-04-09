@@ -18,8 +18,13 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!-- TABLE STYLES-->
     <link href="js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="css/jqModal.css" type="text/css" rel="stylesheet" />
+
     <style>
-        #editMedecine {
+        .editMedecineBefore {
+            display: none;
+        }
+        .editMedecine {
             width: 40vw;
             height: 30vw;
             border-radius: 10px;
@@ -35,7 +40,8 @@
 </head>
 
 <body>
-    <div id="editMedecine">
+    <button id="button">测试</button>
+    <div id="editMedecineID" class="editMedecineBefore">
         <div class="row">
             <div class="col-md-12">
                 <!-- Advanced Tables -->
@@ -75,50 +81,13 @@
     <script src="js/dataTables/dataTables.bootstrap.js"></script>
     <script src="js/custom-scripts.js"></script>
     <script src="js/handlebars-v4.0.12.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jqModal.js"></script>
 
-    <script id="table-template" type="text/x-handlebars-template">
-        {{#each this}}
-          <tr class="odd gradeX">
-              <td>{{name}}</td>
-              <td>{{code}}</td>
-              <td>{{type}}</td>
-              <td>{{purchaseprice}}</td>
-              <td>{{sellprice}}</td>
-              <td>{{summary}}</td>
-              <td><button class="add" data-id="{{id}}"><i class="fa fa-plus" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
-         </tr>
-              {{/each}}  
-        </script>
-
-    <!-- 其实啥也没修改就是告诉坤哥我正在写 -->
     <script>
-        $.ajax({
-            type: "GET",
-            url: "/goods/info",
-            dataType: "json",
-            data: {},
-            success: function (json) {
-                var func = Handlebars.compile($("#table-template").html());
-                var result = func(json);
-                $('#goodsall').html(result);
-                $('#dataTables-example').dataTable();
-
-            }
-        });
-        // 模态框确认按钮点击事件
-        $("#goodsall").on('click', '.del', function () {
-            var _this = this
-            var flag = confirm('确定要删除本条记录吗？')
-            if (flag) {
-                $.get('/deleteProvider/' + $(this).data('id'), function (data) {
-                    console.log(data)
-                    if (data.msg === "success") {
-                        $(_this).parents('tr').remove()
-                    } else {
-                        alert('删除失败！')
-                    }
-                })
-            }
+        
+         $("#button").click(function () {
+            $("#editMedecine").removeClass()
+            document.getElementById( "editMedecineID" ).className = "editMedecine";
 
         })
     </script>

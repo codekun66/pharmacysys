@@ -19,24 +19,21 @@
     <link href="js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="css/jqModal.css" type="text/css" rel="stylesheet" />
     <style>
-        #editMedecine {
-            display: none;
-            width: 40vw;
-            height: 30vw;
-            border-radius: 10px;
-            font-size: 12px;
-            margin: auto;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1001;
-            -moz-opacity: 0.8;
-            opacity: .80;
-            filter: alpha(opacity=80);
-
-        }
+            .editProviderBefore {
+                display: none;
+            }
+            .editProvider {
+                width: 40vw;
+                height: 30vw;
+                border-radius: 10px;
+                font-size: 12px;
+                margin: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
     </style>
 </head>
 
@@ -185,7 +182,7 @@
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <div id="editProvider">
+    <div id="editProviderID" class="editProviderBefore">
         <div class="row">
             <div class="col-md-12">
                 <!-- Advanced Tables -->
@@ -273,17 +270,9 @@
             }
 
         })
-        /**
-         *在js初始化，初始化jqModal插件
-         */
-        $(function () {
-            $('#editProvider').jqm();
-        })
-        /**
-         *直接做一个dialog调用函数；做一些操作
-         */
          $("#providerall").on('click', '.edit', function () {
-            $("#editProvider").jqmShow();
+            $("#editProvider").removeClass()
+            document.getElementById( "editProviderID" ).className = "editProvider";
         })
     </script>
     <!-- Custom Js -->
