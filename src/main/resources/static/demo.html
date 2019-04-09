@@ -24,6 +24,7 @@
         .editMedecineBefore {
             display: none;
         }
+
         .editMedecine {
             width: 40vw;
             height: 30vw;
@@ -35,6 +36,9 @@
             left: 0;
             right: 0;
             bottom: 0;
+        }
+        #edit-inner{
+            text-align: center;
         }
     </style>
 </head>
@@ -63,6 +67,11 @@
 
                                 </tbody>
                             </table>
+                            <div id="edit-inner">
+                                <button id="edit-submit">提交</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button id="edit-cancel">取消</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,11 +93,16 @@
     <script type="text/javascript" language="javascript" src="js/jqModal.js"></script>
 
     <script>
-        
-         $("#button").click(function () {
+        $("#button").click(function () {
             $("#editMedecine").removeClass()
-            document.getElementById( "editMedecineID" ).className = "editMedecine";
+            document.getElementById("editMedecineID").className = "editMedecine";
 
+        })
+        $("#edit-submit").click(function(){
+
+        })
+        $("#edit-submit").click(function(){
+            
         })
     </script>
     <!-- Custom Js -->

@@ -17,23 +17,26 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!-- TABLE STYLES-->
     <link href="js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-    <link href="css/jqModal.css" type="text/css" rel="stylesheet" />
     <style>
-            .editProviderBefore {
-                display: none;
-            }
-            .editProvider {
-                width: 40vw;
-                height: 30vw;
-                border-radius: 10px;
-                font-size: 12px;
-                margin: auto;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
+        .editProviderBefore {
+            display: none;
+        }
+
+        .editProvider {
+            width: 40vw;
+            height: 30vw;
+            border-radius: 10px;
+            font-size: 12px;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        #edit-inner {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -200,10 +203,15 @@
                                         <th>更新人</th>
                                     </tr>
                                 </thead>
-                                <tbody id="providerall">
+                                <tbody id="providerall-edit">
 
                                 </tbody>
                             </table>
+                            <div id="edit-inner">
+                                <button id="edit-submit">提交</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button id="edit-cancel">取消</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,7 +230,6 @@
     <script src="js/dataTables/dataTables.bootstrap.js"></script>
     <script src="js/custom-scripts.js"></script>
     <script src="js/handlebars-v4.0.12.js"></script>
-    <script type="text/javascript" language="javascript" src="js/jqModal.js"></script>
 
     <script id="table-template" type="text/x-handlebars-template">
         {{#each this}}
@@ -270,9 +277,28 @@
             }
 
         })
-         $("#providerall").on('click', '.edit', function () {
+        $("#providerall").on('click', '.edit', function () {
             $("#editProvider").removeClass()
-            document.getElementById( "editProviderID" ).className = "editProvider";
+            document.getElementById("editProviderID").className = "editProvider";
+            $.ajax({
+                type: "GET",
+                url: "/provider/info",
+                dataType: "json",
+                data: {},
+                success: function (json) {
+                    var func = Handlebars.compile($("#table-template").html());
+                    var result = func(json);
+                    $('#providerall-edit').html(result);
+                    $('#dataTables-example').dataTable();
+
+                }
+            });
+        })
+        $("#edit-submit").click(function () {
+
+        })
+        $("#edit-submit").click(function () {
+
         })
     </script>
     <!-- Custom Js -->
