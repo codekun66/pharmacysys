@@ -32,16 +32,15 @@
               <version>3.8.1</version>
               <scope>test</scope>
         </dependency>
-        <!-- 添加Thymeleaf组件 -->
-        <dependency>  
-    		<groupId>org.springframework.boot</groupId>  
-    		<artifactId>spring-boot-starter-thymeleaf</artifactId>  
+		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<!-- 解决spring-boot thymeleaf模板对非严格HTML5格式文件的解析 -->
-		<dependency> 
-			<groupId>net.sourceforge.nekohtml</groupId> 
-			<artifactId>nekohtml</artifactId> 
-			<version>1.9.22</version> 
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.22</version>
 		</dependency>
 		<!-- 配置springBoot项目的热部署启动 -->
         <dependency>

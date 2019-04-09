@@ -1,16 +1,11 @@
 package com.zp.pharmacysys.config;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 @Configuration
-public class WebSecurityConfig extends WebMvcConfigurerAdapter{
+public class WebSecurityConfig extends WebMvcConfigurerAdapter {
    /*  *//**
      * 登录session key
      *//*
@@ -40,4 +35,18 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter{
             return false;
         }
     }*/
+/*	 @Override
+	    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+	        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+	    }
+
+	    @Override
+	    protected void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	        configurer.enable();
+	    }*/
+	/*@Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    }
+		*/
 }

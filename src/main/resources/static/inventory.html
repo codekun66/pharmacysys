@@ -114,7 +114,7 @@
 			 <div class="row">
                     <div class="col-md-12">
                         <h3 class="page-header">
-                                                                   供应商信息 
+                                                                   库存信息 
                         </h3>
                     </div>
                 </div> 
@@ -131,16 +131,16 @@
                                         <tr>
                                             <th>商品名称</th>
                                             <th>商品编号</th>
+                                            <th>商品类别</th>
                                             <th>库存量</th>
                                             <th>销售量</th>
                                             <th>上次进价</th>
-                                            <th>预设售价</th>
+                                            <th>上次售价</th>
                                             <th>库存总值</th>
                                             <th>售价总值</th>
-                                            <th>操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="providerall">
+                                    <tbody id="inventoryall">
                                        
                                     </tbody>
                                 </table>
@@ -174,14 +174,15 @@
     <script id="table-template" type="text/x-handlebars-template">
     {{#each this}}
       <tr class="odd gradeX">
-          <td>{{name}}</td>
-          <td>{{linkman}}</td>
-          <td>{{mobile}}</td>
-          <td>{{addres}}</td>
-          <td>{{summary}}</td>
-          <td>{{userName}}</td>
-          <td>{{modifieldTime}}</td>
-          <td><button class="add" data-id="{{id}}"><i class="fa fa-plus" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+          <td>{{goodsName}}</td>
+          <td>{{goodsCode}}</td>
+		  <td>{{goodsType}}</td>
+          <td>{{incount}}</td>
+          <td>{{sellcount}}</td>
+          <td>{{lastpurchaseprice}}</td>
+          <td>{{lastsellprice}}</td>
+          <td>{{inventorytotal}}</td>
+          <td>{{selltotal}}</td>
      </tr>
 	      {{/each}}  
     </script>  
@@ -190,13 +191,13 @@
     <script>
             $.ajax({
                 type: "GET",
-                url: "/provider/info",
+                url: "/inventory/info",
                 dataType: "json",
                 data: {},
                 success: function (json) {
                     var func = Handlebars.compile($("#table-template").html());
 				    var result = func(json);
-                    $('#providerall').html(result);
+                    $('#inventoryall').html(result);
                     $('#dataTables-example').dataTable();
 
                 }

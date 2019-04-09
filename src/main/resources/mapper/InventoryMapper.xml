@@ -45,5 +45,11 @@
 		WHERE 
 		goods_id = #{goodsId}
 	</select>
+	<!-- 查询所有库存信息 -->
+	<select id = "queryInventoryInfo" resultType="java.util.Map">
+		SELECT 
+		*
+		FROM inventory 
+	</select>
 
 </mapper>

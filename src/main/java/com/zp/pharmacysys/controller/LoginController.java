@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.zp.pharmacysys.config.WebSecurityConfig;
 import com.zp.pharmacysys.service.UserService;
@@ -49,7 +50,7 @@ public class LoginController {
 	
     @RequestMapping(value = "/login.html", method = RequestMethod.GET)
 	public String toLogin () {
-    	return "login";
+    	 return "login";
     }
 	 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

@@ -1,5 +1,6 @@
 package com.zp.pharmacysys.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +30,11 @@ public interface InventoryMapper {
 	 * @return 
 	 */
 	Map<String, Object> queryInventoryInfoById(@Param("goodsId") int goodsId);
+
+	/**
+	 * 查询所有库存信息
+	 *
+	 * @return 
+	 */
+	List<Map<String, Object>> queryInventoryInfo();
 }
