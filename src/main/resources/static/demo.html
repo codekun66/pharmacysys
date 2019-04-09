@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-	<!-- Bootstrap Styles-->
+    <!-- Bootstrap Styles-->
     <link href="css/bootstrap.css" rel="stylesheet" />
-     <!-- FontAwesome Styles-->
+    <!-- FontAwesome Styles-->
     <link href="css/font-awesome.css" rel="stylesheet" />
-     <!-- Morris Chart Styles-->
-   
-        <!-- Custom Styles-->
+    <!-- Morris Chart Styles-->
+
+    <!-- Custom Styles-->
     <link href="css/custom-styles.css" rel="stylesheet" />
-     <!-- Google Fonts-->
-   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-     <!-- TABLE STYLES-->
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- TABLE STYLES-->
     <link href="js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
     <style>
-        #editMedecine{
+        #editMedecine {
             width: 40vw;
             height: 30vw;
             border-radius: 10px;
@@ -32,42 +33,44 @@
         }
     </style>
 </head>
+
 <body>
     <div id="editMedecine">
-            <div class="row">
-                    <div class="col-md-12">
-                        <!-- Advanced Tables -->
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                        <thead>
-                                            <tr>
-                                                <th>药品名称</th>
-                                                <th>药品编号</th>
-                                                <th>药品类别</th>
-                                                <th>预设进价</th>
-                                                <th>预设售价</th>
-                                                <th>药品描述</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="goodsall">
-                                           
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Advanced Tables -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>供应商名称</th>
+                                        <th>联系人</th>
+                                        <th>联系电话</th>
+                                        <th>联系地址</th>
+                                        <th>描述</th>
+                                        <th>更新人</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="providerall">
+
+                                </tbody>
+                            </table>
                         </div>
-                        <!--End Advanced Tables -->
                     </div>
                 </div>
+                <!--End Advanced Tables -->
+            </div>
+        </div>
+        <!-- /. ROW  -->
     </div>
     <script src="js/jquery-1.10.2.js"></script>
-      <!-- Bootstrap Js -->
+    <!-- Bootstrap Js -->
     <script src="js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
     <script src="js/jquery.metisMenu.js"></script>
-     <!-- DATA TABLE SCRIPTS -->
+    <!-- DATA TABLE SCRIPTS -->
     <script src="js/dataTables/jquery.dataTables.js"></script>
     <script src="js/dataTables/dataTables.bootstrap.js"></script>
     <script src="js/custom-scripts.js"></script>
@@ -85,42 +88,41 @@
               <td><button class="add" data-id="{{id}}"><i class="fa fa-plus" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
          </tr>
               {{/each}}  
-        </script>  
-        
-        <!-- 其实啥也没修改就是告诉坤哥我正在写 -->
-        <script>
-                $.ajax({
-                    type: "GET",
-                    url: "/goods/info",
-                    dataType: "json",
-                    data: {},
-                    success: function (json) {
-                        var func = Handlebars.compile($("#table-template").html());
-                        var result = func(json);
-                        $('#goodsall').html(result);
-                        $('#dataTables-example').dataTable();
-    
-                    }
-                });
-                // 模态框确认按钮点击事件
-                $("#goodsall").on('click', '.del', function () {
-                    var _this = this
-                    var flag = confirm('确定要删除本条记录吗？')
-                    if (flag) {
-                        $.get('/deleteProvider/' + $(this).data('id'), function (data) {
-                            console.log(data)
-                            if (data.msg === "success") {
-                                $(_this).parents('tr').remove()
-                            } else {
-                                alert('删除失败！')
-                            }
-                        })
-                    }
-    
-                })
-    
-    
         </script>
-             <!-- Custom Js -->
+
+    <!-- 其实啥也没修改就是告诉坤哥我正在写 -->
+    <script>
+        $.ajax({
+            type: "GET",
+            url: "/goods/info",
+            dataType: "json",
+            data: {},
+            success: function (json) {
+                var func = Handlebars.compile($("#table-template").html());
+                var result = func(json);
+                $('#goodsall').html(result);
+                $('#dataTables-example').dataTable();
+
+            }
+        });
+        // 模态框确认按钮点击事件
+        $("#goodsall").on('click', '.del', function () {
+            var _this = this
+            var flag = confirm('确定要删除本条记录吗？')
+            if (flag) {
+                $.get('/deleteProvider/' + $(this).data('id'), function (data) {
+                    console.log(data)
+                    if (data.msg === "success") {
+                        $(_this).parents('tr').remove()
+                    } else {
+                        alert('删除失败！')
+                    }
+                })
+            }
+
+        })
+    </script>
+    <!-- Custom Js -->
 </body>
+
 </html>
