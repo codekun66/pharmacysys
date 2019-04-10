@@ -43,4 +43,18 @@
 		WHERE code = #{code}
 	</select>
 	
+	<!-- 更新药品信息 -->
+	<update id="updateGoods">
+		update
+		goods
+		set
+		name=#{name} ,
+        code= #{code},
+		type = #{type},
+		purchaseprice = #{purchaseprice},
+		sellprice = #{sellprice},
+		summary= #{summary},
+        modifield_time = now() 
+		where id = #{id}
+	</update>
 </mapper>

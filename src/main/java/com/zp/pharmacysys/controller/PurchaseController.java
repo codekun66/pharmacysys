@@ -27,7 +27,7 @@ public class PurchaseController {
 	 * 获得所有采购订单信息接口
 	 * @return
 	 * */
-	@RequestMapping("/purchase/info")
+	@RequestMapping(value="/purchase/info" , method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String, Object>> getPurchaseList() throws Exception{
 		List<Map<String, Object>> list = purchaseService.getPurchaseInfo();

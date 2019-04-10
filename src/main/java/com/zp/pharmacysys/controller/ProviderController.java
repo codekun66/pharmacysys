@@ -32,7 +32,7 @@ public class ProviderController {
 	/*
 	 * 增加供应商信息列表接口
 	 */
-	@RequestMapping(value = "/provider/add" , method = RequestMethod.POST)
+	@RequestMapping(value = "/provider/add" , method = RequestMethod.POST )
 	@ResponseBody
 	public Map<String, Object> addProvider(@RequestBody Provider provider) throws Exception{
 		System.out.println(provider.toString());

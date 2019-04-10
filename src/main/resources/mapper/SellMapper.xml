@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zp.pharmacysys.mapper.SellMapper">
+
+	<!-- 添加销售订单信息 -->
+	<insert id= "insertSell"   useGeneratedKeys="true" keyProperty="id"
+		keyColumn="id" parameterType="java.util.Map" >
+		INSERT INTO 
+		sell 
+		(ordercode ,  create_time , modifield_time , user_id , remark , state)
+		values(#{ordercode}  , now() , now(), #{userId} , #{remark} ,1 )
+	</insert>
+
+    <!-- 添加销售订单中商品信息 -->
+	<insert id="insertSellDetail" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		insert into selldetail
+		(
+		goods_id , provider_id , count , unitprice , totalprice , create_time , modifield_time , sell_id)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.goodsId},
+			#{item.providerId},
+			#{item.count},
+			#{item.unitprice},
+			#{item.totalprice},
+			now(),
+			now(),
+			#{item.sellId}
+			)
+		</foreach>
+	</insert>
+	
+	<!-- 根据销售订单ordercode查询id -->
+	<select id = "queryIdByOrderCode" parameterType="String"
+	  resultType="java.lang.Integer">
+		SELECT 
+		id
+		FROM 
+		sell
+		WHERE ordercode = #{ordercode}
+	</select>
+
+	<!-- 查询销售订单信息 -->
+	<select id = "querySellInfo" resultType="java.util.Map">
+		SELECT
+		*
+		FROM sell
+	</select>
+	
+	<!-- 查询销售订单信息 -->
+	<select id = "querySellDetailInfoById" resultType="java.util.Map">
+		SELECT
+		*
+		FROM selldetail
+		where sell_id = #{sellId}
+	</select>
+</mapper>

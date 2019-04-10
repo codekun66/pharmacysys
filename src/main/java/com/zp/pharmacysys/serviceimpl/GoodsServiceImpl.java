@@ -55,4 +55,10 @@ public class GoodsServiceImpl implements GoodsService {
 		return count;
 	}
 
+	@Override
+	public int updateGoodsById(Goods goods) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsMapper.updateGoods(goods);
+	}
+
 }

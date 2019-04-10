@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.zp.pharmacysys.bean.Goods;
-import com.zp.pharmacysys.bean.Provider;
 
 /*
  * 药品业务接口层
@@ -31,5 +30,11 @@ public interface GoodsService {
 	 * */
 	int addGoods(Goods goods)throws Exception;
 	
+	/*
+	  * 更新药品信息
+	  *
+	  * @return
+	  */
+	int updateGoodsById(Goods goods) throws Exception; 
 
 }

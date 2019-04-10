@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zp.pharmacysys.bean.Goods;
+import com.zp.pharmacysys.bean.Provider;
 import com.zp.pharmacysys.service.GoodsService;
 import com.zp.pharmacysys.service.UserService;
 
@@ -35,7 +36,7 @@ public class GoodsController {
 	}
 	
 	/*
-	 * 增加供应商信息列表接口
+	 * 增加药品信息列表接口
 	 */
 	@RequestMapping(value = "/goods/add" , method = RequestMethod.POST)
 	@ResponseBody
@@ -55,9 +56,32 @@ public class GoodsController {
 		}
 	}
 	
+	/*
+	  * 更新药品信息
+	  */
+	 @RequestMapping(value = "/goods/update", method = RequestMethod.POST)
+	 @ResponseBody
+		public Map<String, Object> updateProvider(@RequestBody Goods goods) throws Exception { // @PathVariable用于定义自定义或动态请求URI
+		 Map<String, Object> map = new HashMap<>();
+		 int count = goodsService.updateGoodsById(goods);
+		 if(count > 0) {
+			  map.put("msg", "success");
+			  map.put("returnCode", 1);
+			}
+		  else {
+			  map.put("msg", "error");
+			  map.put("returnCode",0);
+			}
+		  return map;  
+	 }
+	
+	
 	@RequestMapping(value = "/goods/all", method = RequestMethod.GET)
 	public String getGoodsInfo(ModelMap modelMap)throws Exception{
 		modelMap.addAttribute("goods" , goodsService.getGoodsList());
 		return "goods";
 	}
+	
+	
+	
 }
