@@ -295,10 +295,25 @@
             });
         })
         $("#edit-submit").click(function () {
-
+            
+            var obj = {
+            };
+            $.ajax({
+                url: "",
+                type: "post",
+                data: JSON.stringify(obj),
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    alert("haha");
+                }
+            });
+            return false
         })
-        $("#edit-submit").click(function () {
 
+        
+        $("#edit-cancel").click(function () {
+            $("#editProvider").removeClass()
+            document.getElementById("editProviderID").className = "editProviderBefore";
         })
     </script>
     <!-- Custom Js -->
