@@ -15,6 +15,8 @@ $.extend({
         var editUrl = opt.url.edit
         var control = opt.control
         var data = opt.data
+        var userId = opt.userId
+        var id = opt.id
         var $modal = $(`
             <div class="modal fade in show" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -50,20 +52,48 @@ $.extend({
         $modal.find('.modal-close').on('click', function () {
             $modal.remove()
         })
-        $submit.on('click', function () {
-            
-            var unindexed_array = $form.serializeArray();
-            var indexed_array = {};
         
-            $.map(unindexed_array, function (n, _i) {
-              indexed_array[n['name']] = n['value'];
+        function getFormData($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function (n, i) {
+      indexed_array[n['name']] = n['value'];
+    });
+     
+    
+    return indexed_array;
+}
+        
+        $submit.on('click', function () {
+        	console.log(add)
+        	var da = getFormData($form);
+            if(add=="providerAdd"){
+            	da.userId = userId
+            	da.id =id
+            	da.uuu = 555;
+        	}
+        	if(add=="purchaseAdd"){
+        		da.ppp = 666;
+        		da.goodsId = $('.spmc').val();
+        	}
+        	
+        	
+        	var dat = JSON.stringify(da);
+        	
+        	console.log(dat)
+            $.ajax({
+                type: 'post',
+                url: url,
+                contentType: 'application/json',
+                dataType: 'json',
+                data: dat,
+                success: function(res) {
+                	console.log(userId)
+                	 console.log('成功')
+                     $modal.remove()
+                }
             });
-            console.log(indexed_array)
-            console.log($form.serialize())
-            $.post(url, indexed_array, function (res) {
-                console.log('成功')
-                $modal.remove()
-            })
         })
 
     

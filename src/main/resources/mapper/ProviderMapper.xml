@@ -18,8 +18,8 @@
 		keyColumn="id" parameterType="com.zp.pharmacysys.bean.Provider" >
 		INSERT INTO 
 		provider 
-		(name , linkman , mobile , addres , summary ,create_time , modifield_time , state)
-		values(#{name} , #{linkman} , #{mobile} , #{addres} , #{summary} , now() , now() , 1 )
+		(name , linkman , mobile , addres , summary ,create_time , modifield_time , state ,user_id)
+		values(#{name} , #{linkman} , #{mobile} , #{addres} , #{summary} , now() , now() , 1 , #{userId})
 	</insert>
 	
 	<!-- 更新对应id供应商信息 -->

@@ -33,17 +33,14 @@
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
+             <li><label style="color:#fff;" id="welcomeLabel"></label></li>
+              <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
@@ -116,9 +113,14 @@
                     <div class="row">
                             <div class="col-md-12">
                                 <h3 class="page-header">
-                                   药品列表
+                                   供应商列表
+                                   <button class="p-add btn-primary btn pull-right ">添加供应商</button>
                                 </h3>
+                                
                             </div>
+                            
+                             
+                        
                         </div> 
                 <!-- /. ROW  -->
 
@@ -126,7 +128,6 @@
                     <div class="col-md-12">
                         <!-- Advanced Tables -->
                         <div class="panel panel-default">
-                         <button class="p-add btn btn-success btn-xs pull-right">添加</button>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                   
@@ -156,11 +157,7 @@
                 </div>
                 <!-- /. ROW  -->
             </div>
-            <footer>
-                <p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a
-                        href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a
-                        href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-            </footer>
+           <footer><p>&copy; 紫阁医药管理系统 &middot; <a href="">豫ICP备05002457号</a> &copy;author·ZP</p></footer>
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -248,6 +245,22 @@
 
 
     <script>
+    var role
+    var userId
+    var username
+    var add
+    $.ajax({
+        type: "get",
+        url: '/judge',
+        success: function (result) {
+            username = result["username"]
+            userId = result["userId"]
+            role = result["role"]
+            $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
+        }
+    })  
+    
+    
         $.ajax({
             type: "GET",
             url: "/provider/info",
@@ -258,7 +271,6 @@
                 var result = func(json);
                 $('#providerall').html(result);
                 $('#dataTables-example').dataTable();
-
             }
         });
 
@@ -282,19 +294,38 @@
                 html: `
                 	<div class="modal-header">
                     <button type="button" class="close modal-close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
+                    <h4 class="modal-title">修改供应商信息</h4>
                 </div>
-                    <form>
-                        <div class="form-group">
-                            <input class="form-control" name="addres"/>    
-                        </div>    
-                    </form>
+                <form>
+                <div class="form-group">
+                     <h4>供应商:</h4> 
+                     <input class="form-control" name="name"/>    
+                </div>  
+                <div class="form-group">
+                     <h4>联系人:</h4> 
+                     <input class="form-control" name="linkman"/>    
+                </div>   
+                <div class="form-group">
+                     <h4>联系电话:</h4> 
+                     <input class="form-control" name="mobile"/>    
+                </div>
+                <div class="form-group">
+                     <h4>联系地址:</h4> 
+               	     <input class="form-control" name="addres"/>    
+                </div>
+                <div class="form-group">
+                     <h4>描述:</h4> 
+                     <input class="form-control" name="summary"/>    
+                </div>
+            </form>
                 `,
                 url: {
                     base: '/provider/update',
                     edit: '/provider/' + id
                 },
                 control: 'edit',
+                id : id ,
+                userId : userId,
             })
 
             });
@@ -303,6 +334,7 @@
 
 
         $('.p-add').on('click', function () {
+        	add = "providerAdd"
             $.modal({
                 html: `
                 	<div class="modal-header">
@@ -310,8 +342,8 @@
                     <h4 class="modal-title">添加供应商信息</h4>
                 </div>
                     <form>
-                        <div class="form-group">
-                             <h4>供应商:</h4> 
+                        <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@</span> 
                              <input class="form-control" name="name"/>    
                         </div>  
                         <div class="form-group">
@@ -335,7 +367,8 @@
                 url: {
                     base: '/provider/add',
                 },
-               
+                
+                userId : userId
                 
             })
             })
