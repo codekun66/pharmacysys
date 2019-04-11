@@ -51,14 +51,13 @@ $.extend({
             $modal.remove()
         })
         $submit.on('click', function () {
-            alert("1")
             var unindexed_array = $form.serializeArray();
             var indexed_array = {};
         
             $.map(unindexed_array, function (n, _i) {
               indexed_array[n['name']] = n['value'];
             });
-            $.post(url, indexed_array, function (_res) {
+            $.post(url, indexed_array, function (res) {
                 console.log('成功')
                 $modal.remove()
             })
