@@ -37,7 +37,7 @@ $.extend({
 
         if (control === 'edit') {
             $.ajax({
-                url: editUrl,
+                url: editUrl, 
                 data: data,
                 success: function (res) {
                     console.log(res)
@@ -51,11 +51,12 @@ $.extend({
             $modal.remove()
         })
         $submit.on('click', function () {
+            alert("1")
             var unindexed_array = $form.serializeArray();
             var indexed_array = {};
-
+        
             $.map(unindexed_array, function (n, _i) {
-                indexed_array[n['name']] = n['value'];
+              indexed_array[n['name']] = n['value'];
             });
             $.post(url, indexed_array, function (_res) {
                 console.log('成功')
@@ -63,7 +64,7 @@ $.extend({
             })
         })
 
-
+    
     }
 })
 
