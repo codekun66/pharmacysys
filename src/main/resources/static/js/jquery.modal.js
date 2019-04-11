@@ -63,7 +63,7 @@ $.extend({
             $.post({
                 url: url,
                 data: indexed_array,
-                dataType: json,
+                dataType: JSON,
                 function (res) {
                     console.log('成功')
                     $modal.remove()
