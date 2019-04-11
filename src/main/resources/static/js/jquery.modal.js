@@ -37,7 +37,7 @@ $.extend({
 
         if (control === 'edit') {
             $.ajax({
-                url: editUrl, 
+                url: editUrl,
                 data: data,
                 success: function (res) {
                     console.log(res)
@@ -51,26 +51,26 @@ $.extend({
             $modal.remove()
         })
         $submit.on('click', function () {
-            
+
             var unindexed_array = $form.serializeArray();
             var indexed_array = {};
-        
+
             $.map(unindexed_array, function (n, _i) {
-              indexed_array[n['name']] = n['value'];
+                indexed_array[n['name']] = n['value'];
             });
             console.log(indexed_array)
             console.log($form.serialize())
             $.post({
-                url : url,
-                data : indexed_array,
+                url: url,
+                data: indexed_array,
                 dataType: json,
                 function (res) {
-                console.log('成功')
-                $modal.remove()
-            }
+                    console.log('成功')
+                    $modal.remove()
+                }
+            })
         })
 
-    
     }
 })
 
