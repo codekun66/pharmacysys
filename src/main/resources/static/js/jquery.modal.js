@@ -60,10 +60,14 @@ $.extend({
             });
             console.log(indexed_array)
             console.log($form.serialize())
-            $.post(url, indexed_array, function (res) {
+            $.post({
+                url : url,
+                data : indexed_array,
+                dataType: json,
+                function (res) {
                 console.log('成功')
                 $modal.remove()
-            })
+            }
         })
 
     
