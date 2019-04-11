@@ -36,16 +36,9 @@ $.extend({
         $submit = $modal.find('.submit')
 
         if (control === 'edit') {
-            var unindexed_array = $form.serializeArray();
-            var indexed_array = {};
-        
-            $.map(unindexed_array, function (n, _i) {
-              indexed_array[n['name']] = n['value'];
-            });
-
             $.ajax({
                 url: editUrl, 
-                data: indexed_array,
+                data: data,
                 success: function (res) {
                     console.log(res)
                     for (var key in res) {
@@ -58,7 +51,16 @@ $.extend({
             $modal.remove()
         })
         $submit.on('click', function () {
-            $.post(url, $form.serialize(), function (res) {
+            
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+        
+            $.map(unindexed_array, function (n, _i) {
+              indexed_array[n['name']] = n['value'];
+            });
+            console.log(indexed_array)
+            console.log($form.serialize())
+            $.post(url, indexed_array, function (res) {
                 console.log('成功')
                 $modal.remove()
             })
