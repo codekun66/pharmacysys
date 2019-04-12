@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">紫阁医药管理系统</a>
+                <a class="navbar-brand" href="goods.html">紫阁医药管理系统</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -40,7 +40,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
@@ -55,9 +55,6 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="goods.html"> 药品列表</a>
-                                </li>
-                                <li>
-                                    <a href="#"> 增加药品</a>
                                 </li>
                             </ul>
                         </li>
@@ -76,7 +73,7 @@
                             <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="table.html"> 销售订单</a>
+                                    <a href="sell.html"> 销售订单</a>
                                 </li>
                             </ul>
                         </li>
@@ -236,7 +233,7 @@
           <td>{{mobile}}</td>
           <td>{{addres}}</td>
           <td>{{summary}}</td>
-          <td>{{userId}}</td>
+          <td>{{userName}}</td>
           <td>{{modifieldTime}}</td>
           <td><button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
      </tr>
@@ -249,6 +246,7 @@
     var userId
     var username
     var add
+    var update
     $.ajax({
         type: "get",
         url: '/judge',
@@ -290,6 +288,7 @@
 
         $('#providerall').on('click', '.edit', function (e) {
             var id = $(this).data('id')
+            update = "providerupdate"
             $.modal({
                 html: `
                 	<div class="modal-header">
@@ -297,26 +296,30 @@
                     <h4 class="modal-title">修改供应商信息</h4>
                 </div>
                 <form>
-                <div class="form-group">
-                     <h4>供应商:</h4> 
-                     <input class="form-control" name="name"/>    
-                </div>  
-                <div class="form-group">
-                     <h4>联系人:</h4> 
-                     <input class="form-control" name="linkman"/>    
-                </div>   
-                <div class="form-group">
-                     <h4>联系电话:</h4> 
-                     <input class="form-control" name="mobile"/>    
-                </div>
-                <div class="form-group">
-                     <h4>联系地址:</h4> 
-               	     <input class="form-control" name="addres"/>    
-                </div>
-                <div class="form-group">
-                     <h4>描述:</h4> 
-                     <input class="form-control" name="summary"/>    
-                </div>
+                    <div class="input-group">
+                             <span class="input-group-addon" >供应商名称：</span> 
+                             <input class="form-control" name="name"/>    
+                        </div>  
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >联系人: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                             <input class="form-control" name="linkman"/>    
+                        </div>   
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >联系电话:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                             <input class="form-control" name="mobile"/>    
+                        </div>
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >联系地址:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                       	     <input class="form-control" name="addres"/>    
+                        </div>
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >描述:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                             <input class="form-control" name="summary"/>    
+                        </div>
             </form>
                 `,
                 url: {
@@ -343,23 +346,27 @@
                 </div>
                     <form>
                         <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">@</span> 
+                             <span class="input-group-addon" >供应商名称：</span> 
                              <input class="form-control" name="name"/>    
                         </div>  
-                        <div class="form-group">
-                             <h4>联系人:</h4> 
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >联系人: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
                              <input class="form-control" name="linkman"/>    
                         </div>   
-                        <div class="form-group">
-                             <h4>联系电话:</h4> 
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >联系电话:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
                              <input class="form-control" name="mobile"/>    
                         </div>
-                        <div class="form-group">
-                             <h4>联系地址:</h4> 
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >联系地址:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
                        	     <input class="form-control" name="addres"/>    
                         </div>
-                        <div class="form-group">
-                             <h4>描述:</h4> 
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >描述:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
                              <input class="form-control" name="summary"/>    
                         </div>
                     </form>
@@ -373,6 +380,23 @@
             })
             })
 
+            
+                $("#providerall").on('click', '.del', function () {
+                var _this = this
+                var flag = confirm('确定要删除本条记录吗？')
+                if (flag) {
+                    $.get('/deleteProvider/' + $(this).data('id'), function (data) {
+                        console.log(data)
+                        if (data.msg === "success") {
+                            $(_this).parents('tr').remove()
+                             window.location.reload()
+                        } else {
+                            alert('删除失败！')
+                        }
+                    })
+                }
+
+            })
     
     
     </script>

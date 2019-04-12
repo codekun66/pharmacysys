@@ -57,4 +57,13 @@
         modifield_time = now() 
 		where id = #{id}
 	</update>
+	
+	<!-- 删除id供应商信息 -->
+	<update id="deleteGoods">
+		update
+		goods
+		set
+		state = 2
+		where id = #{id}
+	</update>
 </mapper>

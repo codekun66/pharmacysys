@@ -27,21 +27,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">紫阁医药管理系统</a>
+                <a class="navbar-brand" href="goods.html">紫阁医药管理系统</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
+              <li><label style="color:#fff;" id="welcomeLabel"></label></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
@@ -57,9 +54,6 @@
 		                     <li>
 		                        <a href="goods.html" > 药品列表</a>
 		                    </li>
-                            <li>
-                                <a href="#"> 增加药品</a>
-                            </li>
                         </ul>
                     </li>
                     <li class="active">
@@ -77,7 +71,7 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="table.html" > 销售订单</a>
+		                        <a href="sell.html" > 销售订单</a>
 		                    </li>
                         </ul>
                     </li>
@@ -189,6 +183,23 @@
     
     
     <script>
+    var role
+    var userId
+    var username
+    var add
+    var update
+    $.ajax({
+        type: "get",
+        url: '/judge',
+        success: function (result) {
+            username = result["username"]
+            userId = result["userId"]
+            role = result["role"]
+            $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
+        }
+    })  
+    
+    
             $.ajax({
                 type: "GET",
                 url: "/inventory/info",

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JInternalFrame;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 				map.put("purchaseState","待审核" );
 			} else if ("1".equals(purchaseState)) {
 				map.put("purchaseState", "审核通过");
+			} else if ("2".equals(purchaseState)) {
+				map.put("purchaseState", "审核不通过");
 			}
 		}
 		
@@ -94,7 +98,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 				map.put("purchaseState","待审核" );
 			} else if ("1".equals(purchaseState)) {
 				map.put("purchaseState", "审核通过");
-			}
+			}  
 		}
 		
 		return list;
@@ -133,8 +137,17 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public int addPurchase(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		map.put("ordercode", OrderUtil.createOrder());
+		int count = Integer.parseInt((String)map.get("count"));
+		double unitprice = Double.parseDouble((String)map.get("unitprice"));
+		map.put("totalprice", count*unitprice);
 		//采购商品id
 		return purchaseMapper.insertPurchase(map);
+	}
+
+	@Override
+	public int notCheckPurchaseById(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return purchaseMapper.updatePurchaseUnState(id);
 	}
 	
 	

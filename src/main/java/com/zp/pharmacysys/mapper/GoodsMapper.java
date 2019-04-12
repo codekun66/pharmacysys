@@ -43,4 +43,13 @@ public interface GoodsMapper {
 	  */
 	int updateGoods(Goods goods); 
 	
+	/*
+	 * 删除药品信息
+	 *
+	 * @return
+	 */
+	int deleteGoods(@Param("id") int id);
+	
+	
+	
 }

@@ -27,21 +27,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">紫阁医药管理系统</a>
+                <a class="navbar-brand" href="goods.html">紫阁医药管理系统</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
+             <li><label style="color:#fff;" id="welcomeLabel"></label></li>
+              <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
@@ -114,7 +111,7 @@
 			 <div class="row">
                     <div class="col-md-12">
                         <h3 class="page-header">
-                                                          采购订单 
+                                                          采购订单审核 
                         </h3>
                     </div>
                 </div> 
@@ -191,6 +188,22 @@
     
     
     <script>
+    
+    var role
+    var userId
+    var username
+    var add
+    var update
+    $.ajax({
+        type: "get",
+        url: '/judge',
+        success: function (result) {
+            username = result["username"]
+            userId = result["userId"]
+            role = result["role"]
+            $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
+        }
+    })  
             $.ajax({
                 type: "GET",
                 url: "/purchase/uncheck",
@@ -214,7 +227,23 @@
                         if (data.msg === "success") {
                             $(_this).parents('tr').remove()
                         } else {
-                            alert('删除失败！')
+                            alert('失败！')
+                        }
+                    })
+                }
+
+            })
+            
+                    $("#purchaseall").on('click', '.uncheck', function () {
+                var _this = this
+                var flag = confirm('确定不通过审核吗？')
+                if (flag) {
+                    $.get('/notcheckpurchase/' + $(this).data('id'), function (data) {
+                        console.log(data)
+                        if (data.msg === "success") {
+                            $(_this).parents('tr').remove()
+                        } else {
+                            alert('失败！')
                         }
                     })
                 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>注册</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/font-awesome-4.7.0/css/font-awesome.css}" rel="stylesheet" />
+    <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet" />
+    <link th:href="@{/css/animate.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+                <h2 class="logo-name">紫 阁</h2>
+            </div>
+            <h3>欢迎注册</h3>
+            <form class="m-t" role="form" action="login.html">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="用户名" required="" id="rege_userName" />
+                </div>
+                <div class="form-group">
+                     <select class="form-control chrole" id="rege_role" >
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" required="" id="rege_password" />
+                </div>
+                <!-- <div class="form-group">
+                                <div class="checkbox i-checks"><label> <input type="checkbox" name="agree"/> Agree the terms and policy </label></div>
+                        </div> --><br>
+                <button type="button" class="btn btn-primary block full-width m-b" id="register_btn">注册</button>
+                <br><br>
+                <p class="text-muted text-center"><small>已经拥有账户了？?</small></p>
+                <a class="btn btn-sm btn-white btn-block" th:href="@{login.html}" href="login.html">登录</a>
+            </form>
+          <p>&copy; 郑州师范学院 &middot; <a href="">豫ICP备05002457号</a> <br>&copy;author·ZP</p>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script th:src="@{js/jquery-2.1.1.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <!-- iCheck -->
+    <script th:src="@{js/icheck.min.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+        $("#register_btn").click(function () {
+            var obj = JSON.stringify({
+                'username': $("#rege_userName").val(),
+                'roleId': $("#rege_role").val(),
+                'password': $("#rege_password").val()
+            });
+            $.ajax({
+                url: "/register/userAdd",
+                type: "post",
+                data: obj,
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    console.log(obj)
+                    alert("注册成功！")
+                    window.location.href = "/login.html";
+                },
+                error: function(){
+                    console.log(obj)
+                }
+            });
+        })
+        
+        
+          $.ajax({
+                       type: "GET",
+                       url: "/role/info",
+                       dataType: "json",
+                       data: {},
+                       success: function (json) {
+       					json.forEach(function(item){
+       						$('.chrole').append("<option value='"+item.id+"'>"  
+       	                            + item.describe + "</option>"); 
+       					})
+                       }
+                   });
+    </script>
+</body>
+
+</html>

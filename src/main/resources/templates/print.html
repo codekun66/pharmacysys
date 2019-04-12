@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/> 
+        <title>订单小票</title>
+        <style type="text/css">
+        *{padding:0;margin: 0;font-size: 16px;}
+        .title {
+            padding: 10px 0;
+            box-sizing: border-box;
+            border-bottom: 1px dashed black;
+        }
+        .title h1{
+            font-size: 20px;
+            text-align: center;
+        }
+        .title .dianjia{
+            font-size: 18px;
+            text-align: center;
+        }
+        h1{font-size: 20px;}
+        .left{
+            float: left;
+        }
+        .right{
+            float:right;
+        }
+        .clearfix{
+            clear: both;
+        }
+        ul{list-style: none;}
+        .print_container{
+            margin: 0 auto;
+            padding: 20px;
+            width: 300px;
+            box-sizing: border-box;
+        }
+        .section1{
+            padding: 10px 0;
+            box-sizing: border-box;
+            border-bottom: 1px dashed black;
+        }
+        .section2 label{
+            display: block;
+        }
+        .section3 label{
+            display: block;
+        }
+        .section4{
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+        .tableDiv{
+            padding: 0 0 10px 0;
+            box-sizing: border-box;
+            border-bottom: 1px dashed black;
+        }
+        .heji{
+            text-align: right;
+            padding: 10px 0;
+            box-sizing: border-box;
+            border-bottom: 1px dashed black;
+        }
+        .xianjin{
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+        .shishou{
+            text-align: right;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+        .section4 .total label{
+            display: block;
+        }
+        .section4 .other_fee{
+            /* border-bottom: 1px solid #DADADA; */
+        }
+        .section5 label{
+            display: block;
+        }
+        </style>
+    </head>
+    <body style="background-color:#fff;" >
+        <div class="print_container">
+            <div class="title">
+                <h1>结账单</h1>
+                <div class="dianjia">紫阁医药品店</div>
+            </div>
+            <div class="section1">
+            <span>
+                            订单号： <h1 th:text= "${sellinfo.ordercode}">订单号：P4252524</h1>
+              </span>
+                <div>结账时间 :   <span th:text= "${#dates.format(sellinfo.modifield_time,'yyyy-MM-dd HH:mm')}">：2019-2-2 23-23</span></div>
+                <div>收银员 : <span th:text= "${sellinfo.username}"></span></div>
+            </div>
+            <!-- <div class="section2">
+                <label>期望送达时间：5678</label>
+                <label>订单备注：1111</label>
+            </div>
+            <div class="section3">
+                <label>订单编号：567890</label>
+                <label>下单时间：1111</label>
+            </div> -->
+            <div class="section4">
+                <div>
+                    <div class="tableDiv">
+                    <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <td width="40%">菜单</td>
+                                    <td width="20%">数量</td>
+                                    <td width="20%">金额</td>
+                                    <td width="20%">总金额</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="detailinfo:${sellinfo.selldetail}">
+                                    <td th:text="${detailinfo.goodsName}">米饭</td>
+                                    <td th:text="${detailinfo.count}">2</td>
+                                    <td th:text="${detailinfo.unitprice}">28.00</td>
+                                    <td th:text="${detailinfo.totalprice}">28.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                   <div class="heji">合计: <span th:text= "${sellinfo.totalprice}">22312</span></div>
+                   <div class="heji">应收:<span th:text= "${sellinfo.totalprice}">22312</span></div>
+                </div>
+                <div class="xianjin">现金支付:<span th:text= "${sellinfo.totalprice}">22312</span></div>
+                <div class="shishou">实收:<span th:text= "${sellinfo.totalprice}">22312</span></div>
+                <div>开单人：<span th:text= "${sellinfo.username}"></span></div>
+                <div>开单时间：<span th:text= "${#dates.format(sellinfo.modifield_time,'yyyy-MM-dd HH:mm')}">：2019-2-2 23-23</span></div>
+                <div>打印人：<span th:text= "${sellinfo.username}"></span></div>
+                <div>打印时间：<span th:text= "${#dates.format(sellinfo.modifield_time,'yyyy-MM-dd HH:mm')}">：2019-2-2 23-23</span></div>
+            </div>  
+        </div>
+        
+        <script th:inline="javascript">
+           /*  window.print() */
+        </script>
+    </body>
+</html>

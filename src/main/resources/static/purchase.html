@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">紫阁医药管理系统</a>
+                <a class="navbar-brand" href="goods.html">紫阁医药管理系统</a>
             </div>
 
       <ul class="nav navbar-top-links navbar-right">
@@ -38,7 +38,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
@@ -54,9 +54,6 @@
 		                     <li>
 		                        <a href="goods.html" > 药品列表</a>
 		                    </li>
-                            <li>
-                                <a href="#"> 增加药品</a>
-                            </li>
                         </ul>
                     </li>
                     <li class="active">
@@ -74,7 +71,7 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="table.html" > 销售订单</a>
+		                        <a href="sell.html" > 销售订单</a>
 		                    </li>
                         </ul>
                     </li>
@@ -112,6 +109,7 @@
                     <div class="col-md-12">
                         <h3 class="page-header">
                                                           采购订单 
+                      <button class="p-add btn-primary btn pull-right ">添加采购订单</button>
                         </h3>
                     </div>
                 </div> 
@@ -121,7 +119,6 @@
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
-                    <button class="p-add btn btn-success btn-xs pull-right">添加</button>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -136,7 +133,6 @@
                                             <th>审核状态</th>
                                             <th>更新人</th>
                                             <th>跟新时间</th>
-                                            <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody id="purchaseall">
@@ -183,7 +179,6 @@
 		  <td>{{purchaseState}}</td>
           <td>{{userName}}</td>
           <td>{{modifield_time}}</td>
-          <td><button class="add" data-id="{{id}}"><i class="fa fa-plus" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
      </tr>
 	      {{/each}}  
     </script>  
@@ -194,6 +189,7 @@
     var userId
     var username
     var add
+    var update
     $.ajax({
         type: "get",
         url: '/judge',
@@ -252,37 +248,48 @@
            					})
                            }
                        });
+                	  
+               	     $.ajax({
+                       type: "GET",
+                       url: "/provider/info",
+                       dataType: "json",
+                       data: {},
+                       success: function (json) {
+       					json.forEach(function(provideritem){
+       						$('.gysmc').append("<option value='"+provideritem.id+"'>"  
+       	                            + provideritem.name + "</option>"); 
+       					})
+                       }
+                   });
                 	   
             $.modal({
                 html: `
                 	<div class="modal-header">
                     <button type="button" class="close modal-close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">添加供应商信息</h4>
+                    <h4 class="modal-title">添加采购订单</h4>
                 </div>
                     <form>
-                    
                     <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">@</span>
-                    <select class="form-control spmc" name="linkman" >
-                        
-                    </select>  
-                  </div>
-                        <div class="form-group">
-                             <h4>联系人:</h4> 
-                             <input class="form-control" name="linkman"/>    
-                        </div>   
-                        <div class="form-group">
-                             <h4>联系电话:</h4> 
-                             <input class="form-control" name="mobile"/>    
-                        </div>
-                        <div class="form-group">
-                             <h4>联系地址:</h4> 
-                       	     <input class="form-control" name="addres"/>    
-                        </div>
-                        <div class="form-group">
-                             <h4>描述:</h4> 
-                             <input class="form-control" name="summary"/>    
-                        </div>
+                        <span class="input-group-addon">选择商品：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <select class="form-control spmc" name="goodsId" >
+                        </select>  
+                    </div>
+                    <label for="basic-url"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon">选择供应商：</span>
+                        <select class="form-control gysmc" name="providerId" >
+                        </select>  
+                    </div>
+                    <label for="basic-url"></label>
+                    <div class="input-group">
+                         <span class="input-group-addon" >数量:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                         <input class="form-control" name="count"/>    
+                    </div>
+                    <label for="basic-url"></label>
+                    <div class="input-group">
+                         <span class="input-group-addon" >单价:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                         <input class="form-control" name="unitprice"/>    
+                    </div>
                     </form>
                 `,
                 url: {

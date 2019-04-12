@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,6 +75,35 @@ public class GoodsController {
 			}
 		  return map;  
 	 }
+	 
+	 /*
+		 * 删除药品信息接口
+		 */
+		 @RequestMapping(value = "/deletegoods/{id}", method = RequestMethod.GET)
+		 @ResponseBody
+		    public Map<String, Object> deleteGoods(@PathVariable("id") int id , ModelMap modelMap) throws Exception {  //@PathVariable用于定义自定义或动态请求URI
+			  int count = goodsService.deleteGoodsById(id);
+			  Map<String, Object> map  = new HashMap<>();
+			  if(count > 0) {
+				  map.put("msg", "success");
+				  map.put("returnCode", 1);
+				}
+			  else {
+				  map.put("msg", "error");
+				  map.put("returnCode",0);
+				}
+			  return map;   
+		    }
+		 /*
+		  * 根据Id查询药品信息
+		  */
+		 @RequestMapping(value = "/goods/{id}", method = RequestMethod.GET)
+		 @ResponseBody
+			public Map<String, Object>  getGoodsById(@PathVariable("id") int id) throws Exception { // @PathVariable用于定义自定义或动态请求URI
+			 Map<String, Object> map = goodsService.getGoodsInfoById(id);
+			 return map;
+			 
+		 }
 	
 	
 	@RequestMapping(value = "/goods/all", method = RequestMethod.GET)

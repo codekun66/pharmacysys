@@ -26,4 +26,25 @@
 		FROM user
 		WHERE id = #{id}
 	</select>
+	
+	<!-- 添加user信息 -->
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id"
+		keyColumn="id" parameterType="java.util.Map">
+		insert into
+		user(
+		username ,
+		password,
+		role_id
+		)
+		values
+		(#{username},#{password},#{roleId})
+	</insert>
+	
+	<!-- 查询所有角色信息 -->
+	<select id = "queryRoleInfo" resultType="java.util.Map">
+		SELECT 
+			*
+		FROM role 
+		
+	</select>
 </mapper>

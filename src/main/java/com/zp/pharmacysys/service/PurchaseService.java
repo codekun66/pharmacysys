@@ -37,6 +37,11 @@ public interface PurchaseService {
 	int checkPurchaseById(int id) throws Exception;
 	
 	/*
+	 * 审核不通过通过采购订单信息
+	 * */
+	int notCheckPurchaseById(int id) throws Exception;
+	
+	/*
      * 添加采购订单信息
      *
      */

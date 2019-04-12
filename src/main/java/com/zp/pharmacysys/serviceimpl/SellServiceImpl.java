@@ -8,8 +8,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zp.pharmacysys.mapper.GoodsMapper;
 import com.zp.pharmacysys.mapper.InventoryMapper;
 import com.zp.pharmacysys.mapper.SellMapper;
+import com.zp.pharmacysys.mapper.UserMapper;
 import com.zp.pharmacysys.service.SellService;
 import com.zp.pharmacysys.util.OrderUtil;
 
@@ -18,6 +20,10 @@ public class SellServiceImpl implements SellService{
 
 	@Autowired
 	private SellMapper sellMapper;
+	@Autowired
+	private GoodsMapper goodsMapper;
+	@Autowired
+	private UserMapper userMapper;
 	@Autowired
 	private InventoryMapper inventoryMapper;
 	@Override
@@ -41,8 +47,10 @@ public class SellServiceImpl implements SellService{
 			int existCount = (int) inventoryMap.get("incount");
 			Map<String, Object> updateInventoryMap = new HashMap<>();
 			updateInventoryMap.put("goodsId", goodsId);
-			//获取此次采购订单数量
+			//获取此次销售订单数量
 			int count = Integer.parseInt((String)map2.get("count"));
+			updateInventoryMap.put("sellcount",count );
+			
 			int totalCount = existCount-count ;
 			BigDecimal x = new BigDecimal(totalCount); 
 	        updateInventoryMap.put("incount",totalCount );
@@ -62,6 +70,14 @@ public class SellServiceImpl implements SellService{
 	}
 	
 	@Override
+	public int addOneSell(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
 	public List<Map<String, Object>> getSellInfo() throws Exception {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> sellList = sellMapper.querySellInfo();
@@ -78,6 +94,28 @@ public class SellServiceImpl implements SellService{
 			map.put("totalprice", x);
 		}
 		return sellList;
+	}
+
+	@Override
+	public Map<String, Object> getSellInfoBySellId(int sellId) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> sellMap = sellMapper.querySellInfoById(sellId);
+		List<Map<String, Object>> sellDetailList = sellMapper.querySellDetailInfoById(sellId);
+		int userId = (int) sellMap.get("user_id");
+		String username = userMapper.queryUsernameById(userId);
+		sellMap.put("username", username);
+		double sellAmount = 0; 
+		BigDecimal x = new BigDecimal(sellAmount);
+		for (Map<String, Object> map : sellDetailList) {
+			int goodsId = (int) map.get("goods_id");
+			Map<String, Object> goodsMap = goodsMapper.queryGoodsInfoById(goodsId);
+			map.put("goodsName", goodsMap.get("name"));
+			BigDecimal totalprice =  (BigDecimal) map.get("totalprice");
+			x = x.add(totalprice);
+		}
+		sellMap.put("totalprice", x);
+		sellMap.put("selldetail", sellDetailList);
+		return sellMap;
 	}
 
 	

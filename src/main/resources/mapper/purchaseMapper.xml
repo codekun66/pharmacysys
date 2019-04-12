@@ -7,7 +7,8 @@
 		SELECT
 		*
 		FROM purchase
-		where state = 0 or state =1
+		where state = 0 or state = 1 or state =2
+		order by  modifield_time  DESC
 	</select>
 	
 	<!-- 根据id查询采购订单信息 -->
@@ -41,4 +42,12 @@
 		values(#{goodsId} , #{providerId} , #{ordercode} , #{count} , #{unitprice} , #{totalprice} , now() , now(), #{userId} , #{remark} ,0)
 	</insert>
 	
+		<!-- 审核采购订单 -->
+	<update id="updatePurchaseUnState">
+		update
+		purchase
+		set
+		state = 2
+		where id = #{id}
+	</update>
 </mapper>

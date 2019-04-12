@@ -27,21 +27,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">紫阁医药管理系统</a>
+                <a class="navbar-brand" href="goods.html">紫阁医药管理系统</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
+             <li><label style="color:#fff;" id="welcomeLabel"></label></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
@@ -51,15 +48,12 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <li class="active">
+                    <li class="active unAdmin" >
                         <a href="#"><i class="fa fa-sitemap"></i> 药品管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
 		                        <a href="goods.html" > 药品列表</a>
 		                    </li>
-                            <li>
-                                <a href="#"> 增加药品</a>
-                            </li>
                         </ul>
                     </li>
                     <li class="active">
@@ -77,7 +71,7 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="table.html" > 销售订单</a>
+		                        <a href="sell.html" > 销售订单</a>
 		                    </li>
                         </ul>
                     </li>
@@ -115,7 +109,9 @@
                     <div class="col-md-12">
                         <h3 class="page-header">
                                                                    药品信息
+           <button class="p-add btn-primary btn pull-right ">添加药品</button>
                         </h3>
+                       
                     </div>
                 </div> 
                  <!-- /. ROW  -->
@@ -168,7 +164,7 @@
     <script src="js/dataTables/dataTables.bootstrap.js"></script>
     <script src="js/custom-scripts.js"></script>
     <script src="js/handlebars-v4.0.12.js"></script>
-    
+      <script src="js/jquery.modal.js"></script>
     <script id="table-template" type="text/x-handlebars-template">
     {{#each this}}
       <tr class="odd gradeX">
@@ -178,13 +174,33 @@
           <td>{{purchaseprice}}</td>
           <td>{{sellprice}}</td>
           <td>{{summary}}</td>
-          <td><button class="add" data-id="{{id}}"><i class="fa fa-plus" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+          <td><button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
      </tr>
 	      {{/each}}  
     </script>  
     
-    <!-- 其实啥也没修改就是告诉坤哥我正在写 -->
     <script>
+    var role
+    var userId
+    var username
+    var add
+    var update
+				$.ajax({
+	    	        type: "get",
+	    	        url: '/judge',
+	    	        success: function (result) {
+	    	        	console.log(result["role"])
+	    	            username = result["username"]
+	    	            userId = result["userId"]
+	    	            role = result["role"]
+	    	            $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
+	    	    	    if(role == "admin"){
+	    	    	    	$('.unAdmin').hide();
+	    	    	    }
+	    	        }
+	    	    }) 		
+    
+    
             $.ajax({
                 type: "GET",
                 url: "/goods/info",
@@ -203,16 +219,122 @@
                 var _this = this
                 var flag = confirm('确定要删除本条记录吗？')
                 if (flag) {
-                    $.get('/deleteProvider/' + $(this).data('id'), function (data) {
+                    $.get('/deletegoods/' + $(this).data('id'), function (data) {
                         console.log(data)
                         if (data.msg === "success") {
                             $(_this).parents('tr').remove()
+                            window.location.reload()
                         } else {
                             alert('删除失败！')
                         }
                     })
                 }
 
+            })
+
+            
+             $('#goodsall').on('click', '.edit', function (e) {
+            var id = $(this).data('id')
+            update = "goodsupdate"
+            $.modal({
+                html: `
+                	<div class="modal-header">
+                    <button type="button" class="close modal-close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改药品信息</h4>
+                </div>
+                <form>
+                    <div class="input-group">
+                             <span class="input-group-addon" >药品名称:</span> 
+                             <input class="form-control" name="name"/>    
+                        </div>  
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >药品编号:</span> 
+                             <input class="form-control" name="code"/>    
+                        </div>   
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >药品类别:</span> 
+                             <input class="form-control" name="type"/>    
+                        </div>
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >预设进价:</span> 
+                       	     <input class="form-control" name="purchaseprice"/>    
+                        </div>
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >预设售价:</span> 
+                             <input class="form-control" name="sellprice"/>    
+                        </div>
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >药品描述:</span> 
+                             <input class="form-control" name="summary"/>    
+                        </div>
+            </form>
+                `,
+                url: {
+                    base: '/goods/update',
+                    edit: '/goods/' + id
+                },
+                control: 'edit',
+                id : id ,
+                userId : userId,
+            })
+
+            });
+    
+ 
+
+
+        $('.p-add').on('click', function () {
+        	add = "goodsAdd"
+            $.modal({
+                html: `
+                	<div class="modal-header">
+                    <button type="button" class="close modal-close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加药品信息</h4>
+                </div>
+                    <form>
+                        <div class="input-group">
+                             <span class="input-group-addon" >药品名称:</span> 
+                             <input class="form-control" name="name"/>    
+                        </div>  
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >药品编号:</span> 
+                             <input class="form-control" name="code"/>    
+                        </div>   
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >药品类别:</span> 
+                             <input class="form-control" name="type"/>    
+                        </div>
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >预设进价:</span> 
+                       	     <input class="form-control" name="purchaseprice"/>    
+                        </div>
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >预设售价:</span> 
+                             <input class="form-control" name="sellprice"/>    
+                        </div>
+                        <label for="basic-url"></label>
+                        <div class="input-group">
+                             <span class="input-group-addon" >药品描述:</span> 
+                             <input class="form-control" name="summary"/>    
+                        </div>
+                    </form>
+                `,
+                url: {
+                    base: '/goods/add',
+                },
+                
+                userId : userId
+                
+            })
             })
 
 

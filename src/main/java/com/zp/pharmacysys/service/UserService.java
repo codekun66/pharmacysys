@@ -1,5 +1,8 @@
 package com.zp.pharmacysys.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,4 +34,18 @@ public interface UserService {
      * @return username
      */
     String getUsernameById(int id);
+    
+    /**
+	 * 添加user
+	 *
+	 * @return
+	 */
+	int addUser(Map<String, Object> map);
+	
+	/**
+     * 查询所有角色信息
+     *
+     * @return
+     */
+	List<Map<String, Object>> getRoleInfo() throws Exception;
 }

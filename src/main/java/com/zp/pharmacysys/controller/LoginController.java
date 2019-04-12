@@ -1,6 +1,7 @@
 package com.zp.pharmacysys.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,10 +13,12 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zp.pharmacysys.service.UserService;
 
 @Controller
@@ -51,6 +54,11 @@ public class LoginController {
 	public String toLogin () {
     	 return "login";
     }
+    
+    @RequestMapping(value = "/register.html", method = RequestMethod.GET)
+ 	public String toRegister () {
+     	return "register";
+     }
 	 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
@@ -92,4 +100,29 @@ public class LoginController {
 	    	return map;
 	    }
 	
+		@RequestMapping(value = "/register/userAdd", method = RequestMethod.POST , consumes="application/json")
+		@ResponseBody
+		public Map<String,Object> addUser(@RequestBody JSONObject jsonParam ) {
+			int count = userService.addUser(jsonParam);
+			Map<String, Object> map = new HashMap<>();
+			if(count > 0) {
+				map.put("msg", "success");
+				map.put("returnCode", 1);
+				return map;
+			}
+			else {
+				map.put("msg","error");
+				map.put("returnCode", 0);
+				return map;
+			}
+		}
+		
+		/*
+		 * 获得所有角色列表接口
+		 */
+		@RequestMapping(value = "/role/info" , method = RequestMethod.GET)
+		@ResponseBody
+		public List<Map<String, Object>> getRoleList() throws Exception{
+			return  userService.getRoleInfo();
+		}
 }

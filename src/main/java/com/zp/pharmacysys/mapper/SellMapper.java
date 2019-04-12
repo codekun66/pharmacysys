@@ -39,4 +39,10 @@ public interface SellMapper {
 	 * @return
 	 * */
 	List<Map<String, Object>> querySellDetailInfoById(@Param("sellId") int sellId);
+	
+	/*
+	 * 根据id返回销售订单信息
+	 * @return
+	 * */
+	Map<String, Object> querySellInfoById(@Param("sellId") int sellId);
 }

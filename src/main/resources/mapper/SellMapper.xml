@@ -57,4 +57,13 @@
 		FROM selldetail
 		where sell_id = #{sellId}
 	</select>
+	
+	<!-- 根据id返回销售订单信息 -->
+		<select id = "querySellInfoById" resultType="java.util.Map">
+		SELECT
+		*
+		FROM sell
+		where id = #{sellId}
+	</select>
+	
 </mapper>

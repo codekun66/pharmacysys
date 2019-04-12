@@ -88,4 +88,23 @@ public class PurchaseController {
 				return map;
 			}
 		}
+		
+		/*
+		 * 审核不通过采购订单接口
+		 */
+		 @RequestMapping(value = "/notcheckpurchase/{id}", method = RequestMethod.GET)
+		 @ResponseBody
+		    public Map<String, Object> notCheckPurchase(@PathVariable("id") int id , ModelMap modelMap) throws Exception {  //@PathVariable用于定义自定义或动态请求URI
+			  int count = purchaseService.notCheckPurchaseById(id);
+			  Map<String, Object> map  = new HashMap<>();
+			  if(count > 0) {
+				  map.put("msg", "success");
+				  map.put("returnCode", 1);
+				}
+			  else {
+				  map.put("msg", "error");
+				  map.put("returnCode",0);
+				}
+			  return map;   
+		    }
 }

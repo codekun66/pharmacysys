@@ -61,4 +61,11 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsMapper.updateGoods(goods);
 	}
 
+	@Override
+	public int deleteGoodsById(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsMapper.deleteGoods(id);
+	}
+
+	
 }

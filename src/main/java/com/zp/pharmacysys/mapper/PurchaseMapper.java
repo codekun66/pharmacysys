@@ -38,4 +38,10 @@ public interface PurchaseMapper {
 	 * @return
 	 * */
 	int insertPurchase(Map<String, Object> map);
+	
+	/*
+	 * 不通过审核采购订单
+	 * @return
+	 * */
+	int updatePurchaseUnState(@Param("id") int id);
 }

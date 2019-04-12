@@ -10,7 +10,8 @@
 			modifield_time as modifieldTime ,
 			user_id as userId
 		FROM provider 
-		WHERE state =1
+		WHERE state =1 
+		order by  modifield_time  DESC
 	</select>
 	
 	<!-- 添加供应商信息 -->

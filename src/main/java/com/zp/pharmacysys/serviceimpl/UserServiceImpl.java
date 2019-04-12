@@ -1,5 +1,8 @@
 package com.zp.pharmacysys.serviceimpl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +38,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String getUsernameById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return userMapper.queryUsernameById(id);
 	}
 
+	@Override
+	public int addUser(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.insertUser(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> getRoleInfo() throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.queryRoleInfo();
+	}
+
+	
 	
 }

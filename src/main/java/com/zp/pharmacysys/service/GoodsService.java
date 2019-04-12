@@ -36,5 +36,12 @@ public interface GoodsService {
 	  * @return
 	  */
 	int updateGoodsById(Goods goods) throws Exception; 
+	
+	/*
+	 * 删除药品信息
+	 *
+	 * @return
+	 */
+	int deleteGoodsById(int id) throws Exception;
 
 }

@@ -24,8 +24,8 @@ $.extend({
                         <div class="modal-body">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default modal-close" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary submit">Save changes</button>
+                            <button type="button" class="btn btn-default modal-close" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary submit">保存</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -70,12 +70,22 @@ $.extend({
         	var da = getFormData($form);
             if(add=="providerAdd"){
             	da.userId = userId
+        	}
+            if(update=="providerupdate"){
+            	da.userId = userId
             	da.id =id
-            	da.uuu = 555;
+        	}
+            if(add=="goodsAdd"){
+            	da.userId = userId
+        	}
+            if(update=="goodsupdate"){
+            	da.userId = userId
+            	da.id =id
         	}
         	if(add=="purchaseAdd"){
-        		da.ppp = 666;
         		da.goodsId = $('.spmc').val();
+        		da.providerId = $('.gysmc').val();
+        		da.userId = userId
         	}
         	
         	
@@ -91,6 +101,7 @@ $.extend({
                 success: function(res) {
                 	console.log(userId)
                 	 console.log('成功')
+                	 window.location.reload()
                      $modal.remove()
                 }
             });

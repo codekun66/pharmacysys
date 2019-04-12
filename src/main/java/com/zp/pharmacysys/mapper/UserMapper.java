@@ -1,5 +1,8 @@
 package com.zp.pharmacysys.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -30,4 +33,19 @@ public interface UserMapper {
      * @return username
      */
     String queryUsernameById (@Param("id") int id) ;
+    
+    
+    /**
+	 * 添加user信息
+	 *
+	 * @return
+	 */
+	int insertUser(Map<String, Object> map);
+	
+	/**
+     * 查询所有角色
+     *
+     * @return
+     */
+	List<Map<String, Object>> queryRoleInfo();
 }
