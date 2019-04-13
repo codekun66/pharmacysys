@@ -47,63 +47,63 @@
             </ul>
         </nav>
         <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-                <div class="sidebar-collapse">
-                    <ul class="nav" id="main-menu">
-                        <li class="active">
-                            <a href="#"><i class="fa fa-sitemap"></i> 药品管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="goods.html"> 药品列表</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="active">
-                            <a href="#"><i class="fa fa-sitemap"></i> 采购管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="provider.html"> 供应商管理</a>
-                                </li>
-                                <li>
-                                    <a href="purchase.html">采购订单</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="active">
-                            <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="sell.html"> 销售订单</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="active">
-                            <a href="#"><i class="fa fa-sitemap"></i> 库存管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="inventory.html"> 库存查看</a>
-                                </li>
-                                <li>
-                                    <a href="checkpur.html">采购审核</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="active">
-                            <a href="#"><i class="fa fa-sitemap"></i> 系统管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="table.html"> 角色管理</a>
-                                </li>
-                                <li>
-                                    <a href="#">用户管理</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-    
-                </div>
-    
-            </nav>
+            <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="active goodsManage" >
+                        <a href="#"><i class="fa fa-sitemap"></i> 药品管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+		                     <li>
+		                        <a href="goods.html" > 药品列表</a>
+		                    </li>
+                        </ul>
+                    </li>
+                    <li class="active purchaseManage">
+                        <a href="#"><i class="fa fa-sitemap"></i> 采购管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+		                     <li>
+		                        <a href="provider.html" > 供应商管理</a>
+		                    </li>
+                            <li>
+                                <a href="purchase.html">采购订单</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active sellManage">
+                        <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+		                     <li>
+		                        <a href="sell.html" > 销售订单</a>
+		                    </li>
+                        </ul>
+                    </li>
+                    <li class="active inventoryManage">
+                        <a href="#"><i class="fa fa-sitemap"></i> 库存管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+		                     <li>
+		                        <a href="inventory.html" > 库存查看</a>
+		                    </li>
+		                    <li>
+		                        <a href="checkpur.html" >采购审核</a>
+		                    </li>
+                        </ul>
+                    </li>
+                    <li class="active  sysManage" >
+                        <a href="#"><i class="fa fa-sitemap"></i> 系统管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+		                     <li>
+		                        <a href="role.html" > 角色管理</a>
+		                    </li>
+                            <li>
+                                <a href="user.html">用户管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
@@ -251,12 +251,33 @@
         type: "get",
         url: '/judge',
         success: function (result) {
+        	console.log(result["role"])
             username = result["username"]
             userId = result["userId"]
             role = result["role"]
             $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
+    	    if(role == "purchaseperson"){
+    	    	$('.goodsManage').hide();
+    	    	$('.sellManage').hide();
+    	    	$('.inventoryManage').hide();
+    	    	$('.sysManage').hide();
+    	    	
+    	    }
+            if(role == "inventoryperson"){
+	    	    	$('.goodsManage').hide();
+	    	    	$('.sellManage').hide();
+	    	    	$('.purchaseManage').hide();
+	    	    	$('.sysManage').hide();
+	    	   }
+            
+            if(role == "sellperson"){
+    	    	$('.goodsManage').hide();
+    	    	$('.inventoryManage').hide();
+    	    	$('.purchaseManage').hide();
+    	    	$('.sysManage').hide();
+    	   }
         }
-    })  
+    }) 		
     
     
         $.ajax({

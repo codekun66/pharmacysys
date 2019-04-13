@@ -46,10 +46,10 @@
             </ul>
         </nav>
         <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
+           <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <li class="active">
+                    <li class="active goodsManage" >
                         <a href="#"><i class="fa fa-sitemap"></i> 药品管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -57,7 +57,7 @@
 		                    </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active purchaseManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 采购管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -68,7 +68,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active sellManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -76,7 +76,7 @@
 		                    </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active inventoryManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 库存管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -87,14 +87,14 @@
 		                    </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active  sysManage" >
                         <a href="#"><i class="fa fa-sitemap"></i> 系统管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="table.html" > 角色管理</a>
+		                        <a href="role.html" > 角色管理</a>
 		                    </li>
                             <li>
-                                <a href="#">用户管理</a>
+                                <a href="user.html">用户管理</a>
                             </li>
                         </ul>
                     </li>
@@ -172,14 +172,14 @@
           <td>{{sellCount}}</td>
           <td>{{totalprice}}</td>
           <td>{{remark}}</td>
-          <td>{{user_id}}</td>
+          <td>{{userName}}</td>
           <td>{{create_time}}</td>
           <td><button class="print" data-id="{{id}}"><i class="fa fa-print" aria-hidden="true"></i></button>&nbsp;&nbsp;</td>
      </tr>
 	      {{/each}}  
     </script>  
     <script>
-    
+  
     
     var role
     var userId
@@ -190,12 +190,33 @@
         type: "get",
         url: '/judge',
         success: function (result) {
+        	console.log(result["role"])
             username = result["username"]
             userId = result["userId"]
             role = result["role"]
             $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
+    	    if(role == "purchaseperson"){
+    	    	$('.goodsManage').hide();
+    	    	$('.sellManage').hide();
+    	    	$('.inventoryManage').hide();
+    	    	$('.sysManage').hide();
+    	    	
+    	    }
+            if(role == "inventoryperson"){
+	    	    	$('.goodsManage').hide();
+	    	    	$('.sellManage').hide();
+	    	    	$('.purchaseManage').hide();
+	    	    	$('.sysManage').hide();
+	    	   }
+            
+            if(role == "sellperson"){
+    	    	$('.goodsManage').hide();
+    	    	$('.inventoryManage').hide();
+    	    	$('.purchaseManage').hide();
+    	    	$('.sysManage').hide();
+    	   }
         }
-    })  
+    }) 		
     
             $.ajax({
                 type: "GET",
@@ -223,7 +244,7 @@
             
             
                    $('.p-add').on('click', function () {
-                	  add = "purchaseAdd"
+                	  add = "sellAdd"
                 	   $.ajax({
                            type: "GET",
                            url: "/goods/info",
@@ -241,7 +262,7 @@
                 	   
             $.modal({
                 html: `
-                	<div class="modal-header">
+                	<div class="modal-header" style="margin-bottom:10px;">
                     <button type="button" class="close modal-close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">添加销售订单</h4>
                 </div>
@@ -256,20 +277,20 @@
                          <span class="input-group-addon" >数量:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
                          <input class="form-control" name="count"/>    
                     </div>
-                    <label for="basic-url"></label>
-                    <div class="input-group">
+                     <label for="basic-url"></label>
+                        <div class="input-group">
                          <span class="input-group-addon" >单价:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
                          <input class="form-control" name="unitprice"/>    
-                    </div>
-                    <label for="basic-url"></label>
+                         </div> 
+                     <label for="basic-url"></label>  -
                     <div class="input-group">
                          <span class="input-group-addon" >备注:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                         <input class="form-control" name="summary"/>    
-                    </div>
+                         <input class="form-control" name="remark"/>    
+                    </div> 
                     </form>
                 `,
                 url: {
-                    base: '/purchase/add',
+                    base: '/sell/add',
                 },
                 userId : userId
                 

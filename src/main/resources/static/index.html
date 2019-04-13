@@ -27,21 +27,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">药店管理系统</a>
+                <a class="navbar-brand" href="goods.html">紫阁医药管理系统</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
+             <li><label style="color:#fff;" id="welcomeLabel"></label></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
@@ -51,45 +48,45 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <li class="active">
+                    <li class="active goodsManage" >
                         <a href="#"><i class="fa fa-sitemap"></i> 药品管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="#" > 药品列表</a>
+		                        <a href="goods.html" > 药品列表</a>
 		                    </li>
-                            <li>
-                                <a href="#"> 增加药品</a>
-                            </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active purchaseManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 采购管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="table.html" > 供应商管理</a>
+		                        <a href="provider.html" > 供应商管理</a>
 		                    </li>
                             <li>
-                                <a href="#">采购订单</a>
+                                <a href="purchase.html">采购订单</a>
                             </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active sellManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="table.html" > 销售订单</a>
+		                        <a href="sell.html" > 销售订单</a>
 		                    </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active inventoryManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 库存管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="table.html" > 库存查看</a>
+		                        <a href="inventory.html" > 库存查看</a>
+		                    </li>
+		                    <li>
+		                        <a href="checkpur.html" >采购审核</a>
 		                    </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active  sysManage" >
                         <a href="#"><i class="fa fa-sitemap"></i> 系统管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -110,51 +107,14 @@
             <div id="page-inner">
 			 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-header">
-                            Tables Page <small>Responsive tables</small>
-                        </h1>
+                        <h3 class="page-header">
+                                                           欢迎使用紫阁医药管理系统
+                        </h3>
+                       
                     </div>
                 </div> 
-                 <!-- /. ROW  -->
-               
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                             Advanced Tables
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="gradeU">
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td class="center">-</td>
-                                            <td class="center">U</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Advanced Tables -->
-                </div>
-            </div>
-                <!-- /. ROW  -->
         </div>
-               <footer><p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p></footer>
+        <footer><p>&copy; 紫阁医药管理系统 &middot; <a href="">豫ICP备05002457号</a> &copy;author·ZP</p></footer>
     </div>
              <!-- /. PAGE INNER  -->
             </div>
@@ -170,13 +130,54 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="js/dataTables/jquery.dataTables.js"></script>
     <script src="js/dataTables/dataTables.bootstrap.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#dataTables-example').dataTable();
-            });
+    <script src="js/custom-scripts.js"></script>
+    <script src="js/handlebars-v4.0.12.js"></script>
+      <script src="js/jquery.modal.js"></script>
+    <script>
+    var role
+    var userId
+    var username
+    var add
+    var update
+				$.ajax({
+	    	        type: "get",
+	    	        url: '/judge',
+	    	        success: function (result) {
+	    	        	console.log(result["role"])
+	    	            username = result["username"]
+	    	            userId = result["userId"]
+	    	            role = result["role"]
+	    	            $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
+	    	    	    if(role == "purchaseperson"){
+	    	    	    	$('.goodsManage').hide();
+	    	    	    	$('.sellManage').hide();
+	    	    	    	$('.inventoryManage').hide();
+	    	    	    	$('.sysManage').hide();
+	    	    	    }
+	    	            if(role == "inventoryperson"){
+		    	    	    	$('.goodsManage').hide();
+		    	    	    	$('.sellManage').hide();
+		    	    	    	$('.purchaseManage').hide();
+		    	    	    	$('.sysManage').hide();
+		    	    	   }
+	    	            
+	    	            if(role == "sellperson"){
+	    	    	    	$('.goodsManage').hide();
+	    	    	    	$('.inventoryManage').hide();
+	    	    	    	$('.purchaseManage').hide();
+	    	    	    	$('.sysManage').hide();
+	    	    	   }
+	    	        }
+	    	    }) 		
+    
+    
+
+            
+
+
     </script>
          <!-- Custom Js -->
-    <script src="js/custom-scripts.js"></script>
+   
     
    
 </body>

@@ -23,6 +23,12 @@ public interface SellMapper {
 	int insertSellDetail(List<Map<String,Object>> list);
 	
 	/*
+	 * 添加销售订单中商品信息
+	 * @return
+	 * */
+	int insertOnrSellDetail(Map<String,Object> map);
+	
+	/*
 	 * 根据销售订单ordercode查询id
 	 * @return
 	 * */

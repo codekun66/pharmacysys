@@ -36,7 +36,7 @@ public class ShiroConfig {
         // setLoginUrl 如果不设置值，默认会自动寻找Web工程根目录下的"/login.jsp"页面 或 "/login" 映射
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         //登陆成功后的页面
-        shiroFilterFactoryBean.setSuccessUrl("/goods.html");
+        //shiroFilterFactoryBean.setSuccessUrl("/goods.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         // 设置无权限时跳转的 url;
         shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");
@@ -46,9 +46,9 @@ public class ShiroConfig {
         //游客，开发权限
         //filterChainDefinitionMap.put("/lessons/**", "anon");
         //用户，需要角色权限 “user”
-        filterChainDefinitionMap.put("/goods/info", "roles[user]");
+      //  filterChainDefinitionMap.put("/goods/info", "roles[user]");
       //管理员，需要角色权限 “admin”
-        filterChainDefinitionMap.put("/goods/info", "roles[admin]");
+      //  filterChainDefinitionMap.put("/goods/info", "roles[admin]");
         //开放登陆接口
         filterChainDefinitionMap.put("/login.html", "anon");
         filterChainDefinitionMap.put("/login", "anon");

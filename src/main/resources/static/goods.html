@@ -3,7 +3,7 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dream</title>
+    <title>商品管理</title>
 	<!-- Bootstrap Styles-->
     <link href="css/bootstrap.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->
@@ -48,7 +48,7 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <li class="active unAdmin" >
+                    <li class="active goodsManage" >
                         <a href="#"><i class="fa fa-sitemap"></i> 药品管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -56,7 +56,7 @@
 		                    </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active purchaseManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 采购管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -67,7 +67,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active sellManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 销售管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -75,7 +75,7 @@
 		                    </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active inventoryManage">
                         <a href="#"><i class="fa fa-sitemap"></i> 库存管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
@@ -86,14 +86,14 @@
 		                    </li>
                         </ul>
                     </li>
-                    <li class="active">
+                    <li class="active  sysManage" >
                         <a href="#"><i class="fa fa-sitemap"></i> 系统管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                     <li>
-		                        <a href="table.html" > 角色管理</a>
+		                        <a href="role.html" > 角色管理</a>
 		                    </li>
                             <li>
-                                <a href="#">用户管理</a>
+                                <a href="user.html">用户管理</a>
                             </li>
                         </ul>
                     </li>
@@ -194,9 +194,29 @@
 	    	            userId = result["userId"]
 	    	            role = result["role"]
 	    	            $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
-	    	    	    if(role == "admin"){
-	    	    	    	$('.unAdmin').hide();
+	    	    	    if(role == "purchaseperson"){
+	    	    	    	$('.goodsManage').hide();
+	    	    	    	$('.sellManage').hide();
+	    	    	    	$('.inventoryManage').hide();
+	    	    	    	$('.sysManage').hide();
+	    	    	    	window.location.href = "/purchase.html"
+	    	    	    	
 	    	    	    }
+	    	            if(role == "inventoryperson"){
+		    	    	    	$('.goodsManage').hide();
+		    	    	    	$('.sellManage').hide();
+		    	    	    	$('.purchaseManage').hide();
+		    	    	    	$('.sysManage').hide();
+		    	    	    	window.location.href = "/inventory.html"
+		    	    	   }
+	    	            
+	    	            if(role == "sellperson"){
+	    	    	    	$('.goodsManage').hide();
+	    	    	    	$('.inventoryManage').hide();
+	    	    	    	$('.purchaseManage').hide();
+	    	    	    	$('.sysManage').hide();
+	    	    	    	window.location.href = "/sell.html"
+	    	    	   }
 	    	        }
 	    	    }) 		
     

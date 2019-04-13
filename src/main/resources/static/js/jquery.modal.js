@@ -87,6 +87,11 @@ $.extend({
         		da.providerId = $('.gysmc').val();
         		da.userId = userId
         	}
+        	  if(add=="sellAdd"){
+              	da.userId = userId
+              	da.goodsId = $('.spmc').val();
+          	}
+        	
         	
         	
         	var dat = JSON.stringify(da);

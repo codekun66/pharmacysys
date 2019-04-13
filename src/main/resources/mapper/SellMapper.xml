@@ -33,6 +33,17 @@
 		</foreach>
 	</insert>
 	
+	
+		<!-- 添加销售订单信息 -->
+	<insert id= "insertOnrSellDetail"   useGeneratedKeys="true" keyProperty="id"
+		keyColumn="id" parameterType="java.util.Map" >
+		INSERT INTO 
+		selldetail 
+		(goods_id  , count , unitprice , totalprice , create_time , modifield_time , sell_id)
+		values(#{goodsId} , #{count}, #{unitprice}, #{totalprice},  now() , now(),  #{sellId})
+	</insert>
+	
+	
 	<!-- 根据销售订单ordercode查询id -->
 	<select id = "queryIdByOrderCode" parameterType="String"
 	  resultType="java.lang.Integer">
