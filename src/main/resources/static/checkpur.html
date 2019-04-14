@@ -200,17 +200,9 @@
             userId = result["userId"]
             role = result["role"]
             $("#welcomeLabel").text("亲爱的"+username+"，欢迎您登录")
-    	    if(role == "purchaseperson"){
-    	    	$('.goodsManage').hide();
-    	    	$('.sellManage').hide();
-    	    	$('.inventoryManage').hide();
-    	    	$('.sysManage').hide();
-    	    	
-    	    }
             if(role == "inventoryperson"){
 	    	    	$('.goodsManage').hide();
 	    	    	$('.sellManage').hide();
-	    	    	$('.purchaseManage').hide();
 	    	    	$('.sysManage').hide();
 	    	   }
             

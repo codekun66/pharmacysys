@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dream</title>
+    <title>role</title>
     <!-- Bootstrap Styles-->
     <link href="css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -110,8 +110,8 @@
                     <div class="row">
                             <div class="col-md-12">
                                 <h3 class="page-header">
-                                   供应商列表
-                                   <button class="p-add btn-primary btn pull-right ">添加供应商</button>
+                                   权限列表
+                                   <button class="p-add btn-primary btn pull-right ">添加权限</button>
                                 </h3>
                                 
                             </div>
@@ -132,16 +132,11 @@
                                         id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th>供应商名称</th>
-                                                <th>联系人</th>
-                                                <th>联系电话</th>
-                                                <th>联系地址</th>
-                                                <th>更新人</th>
-                                                <th>跟新时间</th>
+                                                <th>权限</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="providerall">
+                                        <tbody id="roleall">
 
                                         </tbody>
                                     </table>
@@ -227,12 +222,7 @@
     {{#each this}}
       <tr class="odd gradeX">
      
-          <td>{{name}}</td>
-          <td>{{linkman}}</td>
-          <td>{{mobile}}</td>
-          <td>{{addres}}</td>
-          <td>{{userName}}</td>
-          <td>{{modifieldTime}}</td>
+          <td>{{describe}}</td>
           <td><button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
      </tr>
 	{{/each}}  
@@ -272,13 +262,13 @@
     
         $.ajax({
             type: "GET",
-            url: "/provider/info",
+            url: "/role/info",
             dataType: "json",
             data: {},
             success: function (json) {
                 var func = Handlebars.compile($("#table-template").html());
                 var result = func(json);
-                $('#providerall').html(result);
+                $('#roleall').html(result);
                 $('#dataTables-example').dataTable();
             }
         });
@@ -297,7 +287,7 @@
             return false
         }) */
 
-        $('#providerall').on('click', '.edit', function (e) {
+        $('#roleall').on('click', '.edit', function (e) {
             var id = $(this).data('id')
             update = "providerupdate"
             $.modal({
@@ -392,7 +382,7 @@
             })
 
             
-                $("#providerall").on('click', '.del', function () {
+                $("#roleall").on('click', '.del', function () {
                 var _this = this
                 var flag = confirm('确定要删除本条记录吗？')
                 if (flag) {

@@ -127,8 +127,9 @@ public class PurchaseServiceImpl implements PurchaseService {
         //库存总值
         updateInventoryMap.put("inventorytotal",  unitprice.multiply(x) );
         //销售总值
-        
+        if (lastsellprice != null) { 
         updateInventoryMap.put("selltotal", lastsellprice.multiply(x) );
+        }
         int updateInventory = inventoryMapper.updateInventory(updateInventoryMap);
 		return purchaseMapper.updatePurchaseState(id);
 	}
@@ -149,9 +150,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 		// TODO Auto-generated method stub
 		return purchaseMapper.updatePurchaseUnState(id);
 	}
-	
-	
-	
 	
 
 }
