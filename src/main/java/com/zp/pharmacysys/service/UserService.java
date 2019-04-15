@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+
 @Service
 public interface UserService {
 	/**
@@ -48,4 +49,45 @@ public interface UserService {
      * @return
      */
 	List<Map<String, Object>> getRoleInfo() throws Exception;
+	
+	/**
+     * 添加role信息
+     *
+     */
+	int addRole(Map<String, Object> map) throws Exception;
+	
+	 /**
+	  * 更新role信息
+	  *
+	  * @return
+	  */
+	int updateRoleById(Map<String, Object> map) throws Exception; 
+	
+	/**
+	 * 通过Id获取role信息
+	 * 
+	 * @return
+	 */
+	Map<String, Object>  getRoleById(int id);
+	
+	/**
+     * 查询所有用户信息
+     *
+     * @return
+     */
+	List<Map<String, Object>> getUserInfo() throws Exception;
+	
+	/**
+	 * 通过Id获取user信息
+	 * 
+	 * @return
+	 */
+	Map<String, Object>  getUserById(int id);
+	
+	/**
+	  * 更新user信息
+	  *
+	  * @return
+	  */
+	int updateUserById(Map<String, Object> map) throws Exception; 
 }

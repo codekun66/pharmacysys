@@ -90,8 +90,17 @@ $.extend({
         	  if(add=="sellAdd"){
               	da.userId = userId
               	da.goodsId = $('.spmc').val();
+          	} 
+        	  if(update=="roleupdate"){
+            	da.id =id
+        	}
+        	  if(add=="userAdd"){
+          		da.roleId = $('.roleli').val();
           	}
-        	
+        	  if(update=="userupdate"){
+            		da.roleId = $('.roleli').val();
+            		da.id =id
+            	}
         	
         	
         	var dat = JSON.stringify(da);

@@ -13,6 +13,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -125,4 +126,94 @@ public class LoginController {
 		public List<Map<String, Object>> getRoleList() throws Exception{
 			return  userService.getRoleInfo();
 		}
+		
+		
+		/*
+		 * 增加role信息列表接口
+		 */
+		@RequestMapping(value = "/role/add" , method = RequestMethod.POST )
+		@ResponseBody
+		public Map<String, Object> addRole(@RequestBody JSONObject jsonParam) throws Exception{
+			int count = userService.addRole(jsonParam);
+			Map<String, Object> map = new HashMap<>();
+			if(count > 0) {
+				map.put("msg", "success");
+				map.put("returnCode", 1);
+				return map;
+			}
+			else {
+				map.put("msg","error");
+				map.put("returnCode", 0);
+				return map;
+			}
+		}
+		 /*
+		  * 根据Id查询role
+		  */
+		 @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
+		 @ResponseBody
+			public Map<String, Object> getRoleById(@PathVariable("id") int id) { // @PathVariable用于定义自定义或动态请求URI
+			 Map<String, Object> map = userService.getRoleById(id);
+			 return map;
+			 
+		 }
+		 /*
+		  * 更新role信息
+		  */
+		 @RequestMapping(value = "/role/update", method = RequestMethod.POST)
+		 @ResponseBody
+			public Map<String, Object> updateRole(@RequestBody JSONObject jsonParam) throws Exception { // @PathVariable用于定义自定义或动态请求URI
+			 Map<String, Object> map = new HashMap<>();
+			 int count = userService.updateRoleById(jsonParam);
+			 if(count > 0) {
+				  map.put("msg", "success");
+				  map.put("returnCode", 1);
+				}
+			  else {
+				  map.put("msg", "error");
+				  map.put("returnCode",0);
+				}
+			  return map;  
+		 }
+		 
+			/*
+			 * 获得所有角色列表接口
+			 */
+			@RequestMapping(value = "/user/info" , method = RequestMethod.GET)
+			@ResponseBody
+			public List<Map<String, Object>> getUserList() throws Exception{
+				return  userService.getUserInfo();
+			}
+			
+			
+			 /*
+			  * 根据Id查询User信息
+			  */
+			 @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+			 @ResponseBody
+				public Map<String, Object> getUserById(@PathVariable("id") int id) { // @PathVariable用于定义自定义或动态请求URI
+				 Map<String, Object> map = userService.getUserById(id);
+				 return map;
+				 
+			 }
+			 
+			 
+			 /*
+			  * 更新role信息
+			  */
+			 @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+			 @ResponseBody
+				public Map<String, Object> updateUser(@RequestBody JSONObject jsonParam) throws Exception { // @PathVariable用于定义自定义或动态请求URI
+				 Map<String, Object> map = new HashMap<>();
+				 int count = userService.updateUserById(jsonParam);
+				 if(count > 0) {
+					  map.put("msg", "success");
+					  map.put("returnCode", 1);
+					}
+				  else {
+					  map.put("msg", "error");
+					  map.put("returnCode",0);
+					}
+				  return map;  
+			 }
 }

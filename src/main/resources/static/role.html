@@ -222,8 +222,8 @@
     {{#each this}}
       <tr class="odd gradeX">
      
-          <td>{{describe}}</td>
-          <td><button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;<button class="del" data-id="{{id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+          <td>{{remark}}</td>
+          <td><button class="edit" data-id="{{id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;&nbsp;</td>
      </tr>
 	{{/each}}  
     </script>
@@ -289,43 +289,23 @@
 
         $('#roleall').on('click', '.edit', function (e) {
             var id = $(this).data('id')
-            update = "providerupdate"
+            update = "roleupdate"
             $.modal({
                 html: `
                 	<div class="modal-header">
                     <button type="button" class="close modal-close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">修改供应商信息</h4>
+                    <h4 class="modal-title">修改权限信息</h4>
                 </div>
                 <form>
-                    <div class="input-group">
-                             <span class="input-group-addon" >供应商名称：</span> 
-                             <input class="form-control" name="name"/>    
+                        <div class="input-group">
+                             <span class="input-group-addon" >权限名称：</span> 
+                             <input class="form-control" name="remark"/>    
                         </div>  
-                        <label for="basic-url"></label>
-                        <div class="input-group">
-                             <span class="input-group-addon" >联系人: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                             <input class="form-control" name="linkman"/>    
-                        </div>   
-                        <label for="basic-url"></label>
-                        <div class="input-group">
-                             <span class="input-group-addon" >联系电话:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                             <input class="form-control" name="mobile"/>    
-                        </div>
-                        <label for="basic-url"></label>
-                        <div class="input-group">
-                             <span class="input-group-addon" >联系地址:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                       	     <input class="form-control" name="addres"/>    
-                        </div>
-                        <label for="basic-url"></label>
-                        <div class="input-group">
-                             <span class="input-group-addon" >描述:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                             <input class="form-control" name="summary"/>    
-                        </div>
             </form>
                 `,
                 url: {
-                    base: '/provider/update',
-                    edit: '/provider/' + id
+                    base: '/role/update',
+                    edit: '/role/' + id
                 },
                 control: 'edit',
                 id : id ,
@@ -338,42 +318,22 @@
 
 
         $('.p-add').on('click', function () {
-        	add = "providerAdd"
+        	add = "roleAdd"
             $.modal({
                 html: `
                 	<div class="modal-header">
                     <button type="button" class="close modal-close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">添加供应商信息</h4>
+                    <h4 class="modal-title">添加新权限</h4>
                 </div>
                     <form>
-                        <div class="input-group">
-                             <span class="input-group-addon" >供应商名称：</span> 
-                             <input class="form-control" name="name"/>    
-                        </div>  
-                        <label for="basic-url"></label>
-                        <div class="input-group">
-                             <span class="input-group-addon" >联系人: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                             <input class="form-control" name="linkman"/>    
-                        </div>   
-                        <label for="basic-url"></label>
-                        <div class="input-group">
-                             <span class="input-group-addon" >联系电话:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                             <input class="form-control" name="mobile"/>    
-                        </div>
-                        <label for="basic-url"></label>
-                        <div class="input-group">
-                             <span class="input-group-addon" >联系地址:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                       	     <input class="form-control" name="addres"/>    
-                        </div>
-                        <label for="basic-url"></label>
-                        <div class="input-group">
-                             <span class="input-group-addon" >描述:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-                             <input class="form-control" name="summary"/>    
-                        </div>
+                       <div class="input-group">
+		                    <span class="input-group-addon" >权限名称：</span> 
+		                    <input class="form-control" name="remark"/>    
+                       </div>  
                     </form>
                 `,
                 url: {
-                    base: '/provider/add',
+                    base: '/role/add',
                 },
                 
                 userId : userId

@@ -53,6 +53,52 @@ public class UserServiceImpl implements UserService {
 		return userMapper.queryRoleInfo();
 	}
 
+	@Override
+	public int addRole(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		String role = (String) map.get("remark");
+		map.put("role", role);
+		return userMapper.insertRole(map);
+	}
+
+	@Override
+	public int updateRoleById(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		String role = (String) map.get("remark");
+		map.put("role", role);
+		return userMapper.updateRoleById(map);
+	}
+
+	@Override
+	public Map<String, Object> getRoleById(int id) {
+		// TODO Auto-generated method stub
+		return userMapper.queryRoleInfoById(id);
+	}
+
+	@Override
+	public List<Map<String, Object>> getUserInfo() throws Exception {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list = userMapper.queryUserInfo();
+		for (Map<String, Object> map : list) {
+			int roleId = (int) map.get("role_id");
+			String remark = userMapper.queryroleById(roleId);
+			map.put("role", remark);
+		}
+		return list;
+	}
+
+	@Override
+	public Map<String, Object> getUserById(int id) {
+		// TODO Auto-generated method stub
+		return userMapper.queryUserInfoById(id);
+	}
+
+	@Override
+	public int updateUserById(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.updateUserById(map);
+	}
+
 	
 	
 }

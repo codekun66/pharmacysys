@@ -45,6 +45,67 @@
 		SELECT 
 			*
 		FROM role 
-		
+	</select>
+	
+	<!-- 添加role信息 -->
+	<insert id= "insertRole"   useGeneratedKeys="true" keyProperty="id"
+		keyColumn="id" parameterType="java.util.Map" >
+		INSERT INTO 
+		role 
+		(role , remark )
+		values(#{role} , #{remark})
+	</insert>
+	
+	<!-- 更新role信息 -->
+	<update id="updateRoleById">
+		update
+		role
+		set
+		role=#{role} ,
+        remark= #{remark}
+		where id = #{id}
+	</update>
+	
+	<!-- 根据Id查询供应商信息  -->
+	<select id = "queryRoleInfoById" resultType="java.util.Map">
+		SELECT 
+			*
+		FROM role 
+		WHERE 
+		id = #{id}
+	</select>
+	
+	<!-- 查询所有用户信息 -->
+	<select id = "queryUserInfo" resultType="java.util.Map">
+		SELECT 
+			*
+		FROM user 
+	</select>
+	
+	<select id="queryroleById" parameterType="java.lang.Integer"
+	  resultType="String">
+		SELECT remark
+		FROM role
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 更新user信息 -->
+	<update id="updateUserById">
+		update
+		user
+		set
+		username=#{username} ,
+        password= #{password},
+        role_id = #{roleId}
+		where id = #{id}
+	</update>
+	
+	<!-- 根据Id查询供应商信息  -->
+	<select id = "queryUserInfoById" resultType="java.util.Map">
+		SELECT 
+			*
+		FROM user
+		WHERE 
+		id = #{id}
 	</select>
 </mapper>
