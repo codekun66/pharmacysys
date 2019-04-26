@@ -53,11 +53,12 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login.html", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/register.html", "anon");
-        filterChainDefinitionMap.put("/register", "anon");
+        filterChainDefinitionMap.put("/register/**", "anon");
         //管理员，需要角色权限 “admin”
         filterChainDefinitionMap.put("/img/**","anon");
         filterChainDefinitionMap.put("/css/**","anon");
         filterChainDefinitionMap.put("/js/**","anon");
+        filterChainDefinitionMap.put("/role/**","anon");
         //filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/**","authc");
         //其余接口一律拦截

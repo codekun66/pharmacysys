@@ -33,15 +33,12 @@ public class InventoryServiceImpl  implements InventoryService{
 		}
 		return list;
 	}
-
 	@Override
 	public int addInventory(Map<String, Object> map) throws Exception {
 		return inventoryMapper.insertInventory(map);
 	}
-
 	@Override
 	public Map<String, Object> getInventoryById(int id) {
-		// TODO Auto-generated method stub
 		return inventoryMapper.queryInventoryInfoById(id);
 	}
  

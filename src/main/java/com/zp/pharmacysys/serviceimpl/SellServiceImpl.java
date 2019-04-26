@@ -53,12 +53,10 @@ public class SellServiceImpl implements SellService{
 			//获得表中原有的销售量
 			int sellcount = (int) inventoryMap.get("sellcount");
 			updateInventoryMap.put("sellcount",count+sellcount );
-			
 			int totalCount = existCount-count ;
 			BigDecimal x = new BigDecimal(totalCount); 
 	        updateInventoryMap.put("incount",totalCount );
 	        //售价
-	        
 	        BigDecimal unitprice = new  BigDecimal((String) map2.get("unitprice"));
 	        updateInventoryMap.put("lastsellprice", unitprice);
 	        //进价
